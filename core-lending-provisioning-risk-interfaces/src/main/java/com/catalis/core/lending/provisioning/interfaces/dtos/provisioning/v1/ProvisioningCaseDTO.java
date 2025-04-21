@@ -1,9 +1,9 @@
 package com.catalis.core.lending.provisioning.interfaces.dtos.provisioning.v1;
 
-import com.catalis.common.core.filters.FilterableId;
 import com.catalis.core.lending.provisioning.interfaces.enums.provisioning.v1.ProvisioningStatusEnum;
 import com.catalis.core.lending.provisioning.interfaces.enums.provisioning.v1.RiskGradeEnum;
 import com.catalis.core.lending.provisioning.interfaces.enums.assessment.v1.StageCodeEnum;
+import com.catalis.core.utils.annotations.FilterableId;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
