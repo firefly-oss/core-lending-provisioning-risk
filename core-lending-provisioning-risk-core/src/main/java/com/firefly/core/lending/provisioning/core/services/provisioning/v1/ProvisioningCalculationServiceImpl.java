@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Mono;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Service
 @Transactional
@@ -25,7 +26,7 @@ public class ProvisioningCalculationServiceImpl implements ProvisioningCalculati
     private ProvisioningCalculationMapper mapper;
 
     @Override
-    public Mono<PaginationResponse<ProvisioningCalculationDTO>> findAll(Long provisioningCaseId, FilterRequest<ProvisioningCalculationDTO> filterRequest) {
+    public Mono<PaginationResponse<ProvisioningCalculationDTO>> findAll(UUID provisioningCaseId, FilterRequest<ProvisioningCalculationDTO> filterRequest) {
         filterRequest.getFilters().setProvisioningCaseId(provisioningCaseId);
         return FilterUtils.createFilter(
                 ProvisioningCalculation.class,
@@ -34,7 +35,7 @@ public class ProvisioningCalculationServiceImpl implements ProvisioningCalculati
     }
 
     @Override
-    public Mono<ProvisioningCalculationDTO> create(Long provisioningCaseId, ProvisioningCalculationDTO dto) {
+    public Mono<ProvisioningCalculationDTO> create(UUID provisioningCaseId, ProvisioningCalculationDTO dto) {
         dto.setProvisioningCaseId(provisioningCaseId);
         ProvisioningCalculation entity = mapper.toEntity(dto);
         entity.setCreatedAt(LocalDateTime.now());
@@ -44,14 +45,14 @@ public class ProvisioningCalculationServiceImpl implements ProvisioningCalculati
     }
 
     @Override
-    public Mono<ProvisioningCalculationDTO> getById(Long provisioningCaseId, Long provisioningCalculationId) {
+    public Mono<ProvisioningCalculationDTO> getById(UUID provisioningCaseId, UUID provisioningCalculationId) {
         return repository.findById(provisioningCalculationId)
                 .filter(entity -> entity.getProvisioningCaseId().equals(provisioningCaseId))
                 .map(mapper::toDTO);
     }
 
     @Override
-    public Mono<ProvisioningCalculationDTO> update(Long provisioningCaseId, Long provisioningCalculationId, ProvisioningCalculationDTO dto) {
+    public Mono<ProvisioningCalculationDTO> update(UUID provisioningCaseId, UUID provisioningCalculationId, ProvisioningCalculationDTO dto) {
         return repository.findById(provisioningCalculationId)
                 .filter(entity -> entity.getProvisioningCaseId().equals(provisioningCaseId))
                 .flatMap(entity -> {
@@ -66,7 +67,7 @@ public class ProvisioningCalculationServiceImpl implements ProvisioningCalculati
     }
 
     @Override
-    public Mono<Void> delete(Long provisioningCaseId, Long provisioningCalculationId) {
+    public Mono<Void> delete(UUID provisioningCaseId, UUID provisioningCalculationId) {
         return repository.findById(provisioningCalculationId)
                 .filter(entity -> entity.getProvisioningCaseId().equals(provisioningCaseId))
                 .flatMap(repository::delete);

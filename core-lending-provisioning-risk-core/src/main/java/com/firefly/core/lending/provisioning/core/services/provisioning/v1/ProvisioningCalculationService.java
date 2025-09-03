@@ -5,6 +5,8 @@ import com.firefly.common.core.queries.PaginationResponse;
 import com.firefly.core.lending.provisioning.interfaces.dtos.provisioning.v1.ProvisioningCalculationDTO;
 import reactor.core.publisher.Mono;
 
+import java.util.UUID;
+
 public interface ProvisioningCalculationService {
 
     /**
@@ -15,7 +17,7 @@ public interface ProvisioningCalculationService {
      * @param filterRequest an object containing the filtering and pagination criteria for the query
      * @return a Mono containing a PaginationResponse of ProvisioningCalculationDTO representing the filtered and paginated list of calculations
      */
-    Mono<PaginationResponse<ProvisioningCalculationDTO>> findAll(Long provisioningCaseId,
+    Mono<PaginationResponse<ProvisioningCalculationDTO>> findAll(UUID provisioningCaseId,
                                                                  FilterRequest<ProvisioningCalculationDTO> filterRequest);
 
     /**
@@ -25,7 +27,7 @@ public interface ProvisioningCalculationService {
      * @param dto the ProvisioningCalculationDTO containing the details of the calculation to be created
      * @return a Mono emitting the created ProvisioningCalculationDTO
      */
-    Mono<ProvisioningCalculationDTO> create(Long provisioningCaseId, ProvisioningCalculationDTO dto);
+    Mono<ProvisioningCalculationDTO> create(UUID provisioningCaseId, ProvisioningCalculationDTO dto);
 
     /**
      * Retrieves a specific provisioning calculation associated with a given provisioning case.
@@ -34,7 +36,7 @@ public interface ProvisioningCalculationService {
      * @param provisioningCalculationId the unique identifier of the provisioning calculation to retrieve
      * @return a Mono emitting the ProvisioningCalculationDTO if found, or empty if not found
      */
-    Mono<ProvisioningCalculationDTO> getById(Long provisioningCaseId, Long provisioningCalculationId);
+    Mono<ProvisioningCalculationDTO> getById(UUID provisioningCaseId, UUID provisioningCalculationId);
 
     /**
      * Updates an existing provisioning calculation associated with a specific provisioning case.
@@ -44,7 +46,7 @@ public interface ProvisioningCalculationService {
      * @param dto the data transfer object containing the updated details of the provisioning calculation
      * @return a Mono emitting the updated ProvisioningCalculationDTO
      */
-    Mono<ProvisioningCalculationDTO> update(Long provisioningCaseId, Long provisioningCalculationId,
+    Mono<ProvisioningCalculationDTO> update(UUID provisioningCaseId, UUID provisioningCalculationId,
                                             ProvisioningCalculationDTO dto);
 
     /**
@@ -54,5 +56,5 @@ public interface ProvisioningCalculationService {
      * @param provisioningCalculationId the unique identifier of the provisioning calculation to be deleted
      * @return a Mono that completes when the deletion operation is successful
      */
-    Mono<Void> delete(Long provisioningCaseId, Long provisioningCalculationId);
+    Mono<Void> delete(UUID provisioningCaseId, UUID provisioningCalculationId);
 }

@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Mono;
 
+import java.util.UUID;
+
 @Service
 @Transactional
 public class ProvisioningStageHistoryServiceImpl implements ProvisioningStageHistoryService {
@@ -23,7 +25,7 @@ public class ProvisioningStageHistoryServiceImpl implements ProvisioningStageHis
     private ProvisioningStageHistoryMapper mapper;
 
     @Override
-    public Mono<PaginationResponse<ProvisioningStageHistoryDTO>> findAll(Long provisioningCaseId, FilterRequest<ProvisioningStageHistoryDTO> filterRequest) {
+    public Mono<PaginationResponse<ProvisioningStageHistoryDTO>> findAll(UUID provisioningCaseId, FilterRequest<ProvisioningStageHistoryDTO> filterRequest) {
         filterRequest.getFilters().setProvisioningCaseId(provisioningCaseId);
         return FilterUtils.createFilter(
                 ProvisioningStageHistory.class,
@@ -32,7 +34,7 @@ public class ProvisioningStageHistoryServiceImpl implements ProvisioningStageHis
     }
 
     @Override
-    public Mono<ProvisioningStageHistoryDTO> create(Long provisioningCaseId, ProvisioningStageHistoryDTO dto) {
+    public Mono<ProvisioningStageHistoryDTO> create(UUID provisioningCaseId, ProvisioningStageHistoryDTO dto) {
         dto.setProvisioningCaseId(provisioningCaseId);
         ProvisioningStageHistory entity = mapper.toEntity(dto);
         return repository.save(entity)
@@ -40,14 +42,14 @@ public class ProvisioningStageHistoryServiceImpl implements ProvisioningStageHis
     }
 
     @Override
-    public Mono<ProvisioningStageHistoryDTO> getById(Long provisioningCaseId, Long provisioningStageHistoryId) {
+    public Mono<ProvisioningStageHistoryDTO> getById(UUID provisioningCaseId, UUID provisioningStageHistoryId) {
         return repository.findById(provisioningStageHistoryId)
                 .filter(entity -> entity.getProvisioningCaseId().equals(provisioningCaseId))
                 .map(mapper::toDTO);
     }
 
     @Override
-    public Mono<ProvisioningStageHistoryDTO> update(Long provisioningCaseId, Long provisioningStageHistoryId, ProvisioningStageHistoryDTO dto) {
+    public Mono<ProvisioningStageHistoryDTO> update(UUID provisioningCaseId, UUID provisioningStageHistoryId, ProvisioningStageHistoryDTO dto) {
         return repository.findById(provisioningStageHistoryId)
                 .filter(entity -> entity.getProvisioningCaseId().equals(provisioningCaseId))
                 .flatMap(entity -> {
@@ -60,7 +62,7 @@ public class ProvisioningStageHistoryServiceImpl implements ProvisioningStageHis
     }
 
     @Override
-    public Mono<Void> delete(Long provisioningCaseId, Long provisioningStageHistoryId) {
+    public Mono<Void> delete(UUID provisioningCaseId, UUID provisioningStageHistoryId) {
         return repository.findById(provisioningStageHistoryId)
                 .filter(entity -> entity.getProvisioningCaseId().equals(provisioningCaseId))
                 .flatMap(repository::delete);

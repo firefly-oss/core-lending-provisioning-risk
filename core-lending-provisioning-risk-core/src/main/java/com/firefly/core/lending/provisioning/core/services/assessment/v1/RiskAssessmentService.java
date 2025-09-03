@@ -5,6 +5,8 @@ import com.firefly.common.core.queries.PaginationResponse;
 import com.firefly.core.lending.provisioning.interfaces.dtos.assessment.v1.RiskAssessmentDTO;
 import reactor.core.publisher.Mono;
 
+import java.util.UUID;
+
 public interface RiskAssessmentService {
 
     /**
@@ -14,7 +16,7 @@ public interface RiskAssessmentService {
      * @param filterRequest an object containing filtering and pagination criteria for the query
      * @return a Mono containing a PaginationResponse of RiskAssessmentDTO representing the filtered and paginated list of risk assessment records
      */
-    Mono<PaginationResponse<RiskAssessmentDTO>> findAll(Long provisioningCaseId,
+    Mono<PaginationResponse<RiskAssessmentDTO>> findAll(UUID provisioningCaseId,
                                                         FilterRequest<RiskAssessmentDTO> filterRequest);
 
     /**
@@ -24,7 +26,7 @@ public interface RiskAssessmentService {
      * @param dto the RiskAssessmentDTO containing the details of the risk assessment to be created
      * @return a Mono emitting the created RiskAssessmentDTO
      */
-    Mono<RiskAssessmentDTO> create(Long provisioningCaseId, RiskAssessmentDTO dto);
+    Mono<RiskAssessmentDTO> create(UUID provisioningCaseId, RiskAssessmentDTO dto);
 
     /**
      * Retrieves a specific risk assessment associated with a given provisioning case.
@@ -33,7 +35,7 @@ public interface RiskAssessmentService {
      * @param riskAssessmentId the unique identifier of the risk assessment to retrieve
      * @return a Mono emitting the RiskAssessmentDTO if found, or empty if not found
      */
-    Mono<RiskAssessmentDTO> getById(Long provisioningCaseId, Long riskAssessmentId);
+    Mono<RiskAssessmentDTO> getById(UUID provisioningCaseId, UUID riskAssessmentId);
 
     /**
      * Updates an existing risk assessment for a specified provisioning case with the provided details.
@@ -43,7 +45,7 @@ public interface RiskAssessmentService {
      * @param dto the data transfer object containing the updated details of the risk assessment
      * @return a Mono emitting the updated RiskAssessmentDTO
      */
-    Mono<RiskAssessmentDTO> update(Long provisioningCaseId, Long riskAssessmentId, RiskAssessmentDTO dto);
+    Mono<RiskAssessmentDTO> update(UUID provisioningCaseId, UUID riskAssessmentId, RiskAssessmentDTO dto);
 
     /**
      * Deletes a risk assessment associated with the specified provisioning case
@@ -53,5 +55,5 @@ public interface RiskAssessmentService {
      * @param riskAssessmentId the unique identifier of the risk assessment to delete
      * @return a Mono that completes when the deletion process is successful
      */
-    Mono<Void> delete(Long provisioningCaseId, Long riskAssessmentId);
+    Mono<Void> delete(UUID provisioningCaseId, UUID riskAssessmentId);
 }

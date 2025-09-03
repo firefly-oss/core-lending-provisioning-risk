@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Mono;
 
+import java.util.UUID;
+
 @Service
 @Transactional
 public class RiskAssessmentServiceImpl implements RiskAssessmentService {
@@ -23,7 +25,7 @@ public class RiskAssessmentServiceImpl implements RiskAssessmentService {
     private RiskAssessmentMapper mapper;
 
     @Override
-    public Mono<PaginationResponse<RiskAssessmentDTO>> findAll(Long provisioningCaseId, FilterRequest<RiskAssessmentDTO> filterRequest) {
+    public Mono<PaginationResponse<RiskAssessmentDTO>> findAll(UUID provisioningCaseId, FilterRequest<RiskAssessmentDTO> filterRequest) {
         filterRequest.getFilters().setProvisioningCaseId(provisioningCaseId);
         return FilterUtils.createFilter(
                 RiskAssessment.class,
@@ -32,21 +34,21 @@ public class RiskAssessmentServiceImpl implements RiskAssessmentService {
     }
 
     @Override
-    public Mono<RiskAssessmentDTO> create(Long provisioningCaseId, RiskAssessmentDTO dto) {
+    public Mono<RiskAssessmentDTO> create(UUID provisioningCaseId, RiskAssessmentDTO dto) {
         dto.setProvisioningCaseId(provisioningCaseId);
         return repository.save(mapper.toEntity(dto))
                 .map(mapper::toDTO);
     }
 
     @Override
-    public Mono<RiskAssessmentDTO> getById(Long provisioningCaseId, Long riskAssessmentId) {
+    public Mono<RiskAssessmentDTO> getById(UUID provisioningCaseId, UUID riskAssessmentId) {
         return repository.findById(riskAssessmentId)
                 .filter(entity -> entity.getProvisioningCaseId().equals(provisioningCaseId))
                 .map(mapper::toDTO);
     }
 
     @Override
-    public Mono<RiskAssessmentDTO> update(Long provisioningCaseId, Long riskAssessmentId, RiskAssessmentDTO dto) {
+    public Mono<RiskAssessmentDTO> update(UUID provisioningCaseId, UUID riskAssessmentId, RiskAssessmentDTO dto) {
         return repository.findById(riskAssessmentId)
                 .filter(entity -> entity.getProvisioningCaseId().equals(provisioningCaseId))
                 .flatMap(existing -> {
@@ -59,7 +61,7 @@ public class RiskAssessmentServiceImpl implements RiskAssessmentService {
     }
 
     @Override
-    public Mono<Void> delete(Long provisioningCaseId, Long riskAssessmentId) {
+    public Mono<Void> delete(UUID provisioningCaseId, UUID riskAssessmentId) {
         return repository.findById(riskAssessmentId)
                 .filter(entity -> entity.getProvisioningCaseId().equals(provisioningCaseId))
                 .flatMap(repository::delete);

@@ -5,6 +5,8 @@ import com.firefly.common.core.queries.PaginationResponse;
 import com.firefly.core.lending.provisioning.interfaces.dtos.provisioning.v1.ProvisioningCaseDTO;
 import reactor.core.publisher.Mono;
 
+import java.util.UUID;
+
 public interface ProvisioningCaseService {
     /**
      * Retrieves a paginated list of ProvisioningCaseDTO objects based on the provided filter criteria.
@@ -28,7 +30,7 @@ public interface ProvisioningCaseService {
      * @param provisioningCaseId the unique identifier of the provisioning case to retrieve
      * @return a {@code Mono} emitting the {@code ProvisioningCaseDTO} if found, or empty if not found
      */
-    Mono<ProvisioningCaseDTO> getById(Long provisioningCaseId);
+    Mono<ProvisioningCaseDTO> getById(UUID provisioningCaseId);
 
     /**
      * Updates an existing provisioning case with the given details.
@@ -37,7 +39,7 @@ public interface ProvisioningCaseService {
      * @param dto the data transfer object containing the updated details of the provisioning case
      * @return a Mono emitting the updated ProvisioningCaseDTO
      */
-    Mono<ProvisioningCaseDTO> update(Long provisioningCaseId, ProvisioningCaseDTO dto);
+    Mono<ProvisioningCaseDTO> update(UUID provisioningCaseId, ProvisioningCaseDTO dto);
 
     /**
      * Deletes the provisioning case identified by the provided ID.
@@ -45,5 +47,5 @@ public interface ProvisioningCaseService {
      * @param provisioningCaseId the ID of the provisioning case to delete
      * @return a Mono that completes when the deletion is successful
      */
-    Mono<Void> delete(Long provisioningCaseId);
+    Mono<Void> delete(UUID provisioningCaseId);
 }

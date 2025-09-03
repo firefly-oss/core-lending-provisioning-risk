@@ -5,6 +5,8 @@ import com.firefly.common.core.queries.PaginationResponse;
 import com.firefly.core.lending.provisioning.interfaces.dtos.provisioning.v1.ProvisioningStageHistoryDTO;
 import reactor.core.publisher.Mono;
 
+import java.util.UUID;
+
 public interface ProvisioningStageHistoryService {
 
     /**
@@ -15,7 +17,7 @@ public interface ProvisioningStageHistoryService {
      * @param filterRequest an object containing filtering and pagination criteria for the query
      * @return a Mono that emits a PaginationResponse containing the filtered and paginated list of ProvisioningStageHistoryDTO objects
      */
-    Mono<PaginationResponse<ProvisioningStageHistoryDTO>> findAll(Long provisioningCaseId,
+    Mono<PaginationResponse<ProvisioningStageHistoryDTO>> findAll(UUID provisioningCaseId,
                                                                   FilterRequest<ProvisioningStageHistoryDTO> filterRequest);
 
     /**
@@ -25,7 +27,7 @@ public interface ProvisioningStageHistoryService {
      * @param dto the {@link ProvisioningStageHistoryDTO} containing the data for the new stage history entry
      * @return a {@link Mono} emitting the created {@link ProvisioningStageHistoryDTO}
      */
-    Mono<ProvisioningStageHistoryDTO> create(Long provisioningCaseId, ProvisioningStageHistoryDTO dto);
+    Mono<ProvisioningStageHistoryDTO> create(UUID provisioningCaseId, ProvisioningStageHistoryDTO dto);
 
     /**
      * Retrieves the provisioning stage history entry for the given provisioning case and stage history IDs.
@@ -34,7 +36,7 @@ public interface ProvisioningStageHistoryService {
      * @param provisioningStageHistoryId the unique identifier of the provisioning stage history
      * @return a Mono emitting the ProvisioningStageHistoryDTO if found, or empty if not found
      */
-    Mono<ProvisioningStageHistoryDTO> getById(Long provisioningCaseId, Long provisioningStageHistoryId);
+    Mono<ProvisioningStageHistoryDTO> getById(UUID provisioningCaseId, UUID provisioningStageHistoryId);
 
     /**
      * Updates an existing provisioning stage history record for a specific provisioning case.
@@ -44,7 +46,7 @@ public interface ProvisioningStageHistoryService {
      * @param dto the data transfer object containing the updated details of the provisioning stage history
      * @return a Mono emitting the updated ProvisioningStageHistoryDTO
      */
-    Mono<ProvisioningStageHistoryDTO> update(Long provisioningCaseId, Long provisioningStageHistoryId, ProvisioningStageHistoryDTO dto);
+    Mono<ProvisioningStageHistoryDTO> update(UUID provisioningCaseId, UUID provisioningStageHistoryId, ProvisioningStageHistoryDTO dto);
 
     /**
      * Deletes a provisioning stage history record associated with the specified provisioning case ID and provisioning stage history ID.
@@ -53,5 +55,5 @@ public interface ProvisioningStageHistoryService {
      * @param provisioningStageHistoryId the unique identifier of the provisioning stage history to delete
      * @return a Mono that completes when the deletion process is successful
      */
-    Mono<Void> delete(Long provisioningCaseId, Long provisioningStageHistoryId);
+    Mono<Void> delete(UUID provisioningCaseId, UUID provisioningStageHistoryId);
 }

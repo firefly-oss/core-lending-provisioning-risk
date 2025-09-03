@@ -5,6 +5,8 @@ import com.firefly.common.core.queries.PaginationResponse;
 import com.firefly.core.lending.provisioning.interfaces.dtos.provisioning.v1.ProvisioningJournalDTO;
 import reactor.core.publisher.Mono;
 
+import java.util.UUID;
+
 public interface ProvisioningJournalService {
 
     /**
@@ -16,7 +18,7 @@ public interface ProvisioningJournalService {
      * @param filterRequest an object containing filtering and pagination criteria for the query
      * @return a Mono containing a PaginationResponse of ProvisioningJournalDTO representing the filtered and paginated list of provisioning journals
      */
-    Mono<PaginationResponse<ProvisioningJournalDTO>> findAll(Long provisioningCaseId, Long provisioningCalculationId,
+    Mono<PaginationResponse<ProvisioningJournalDTO>> findAll(UUID provisioningCaseId, UUID provisioningCalculationId,
                                                              FilterRequest<ProvisioningJournalDTO> filterRequest);
 
     /**
@@ -28,7 +30,7 @@ public interface ProvisioningJournalService {
      * @param dto the ProvisioningJournalDTO containing the details of the journal entry to be created
      * @return a Mono emitting the created ProvisioningJournalDTO
      */
-    Mono<ProvisioningJournalDTO> create(Long provisioningCaseId, Long provisioningCalculationId, ProvisioningJournalDTO dto);
+    Mono<ProvisioningJournalDTO> create(UUID provisioningCaseId, UUID provisioningCalculationId, ProvisioningJournalDTO dto);
 
     /**
      * Retrieves a specific ProvisioningJournalDTO by its unique identifiers.
@@ -38,7 +40,7 @@ public interface ProvisioningJournalService {
      * @param provisioningJournalId the unique identifier of the provisioning journal entry to retrieve
      * @return a Mono emitting the ProvisioningJournalDTO if found, or empty if not found
      */
-    Mono<ProvisioningJournalDTO> getById(Long provisioningCaseId, Long provisioningCalculationId, Long provisioningJournalId);
+    Mono<ProvisioningJournalDTO> getById(UUID provisioningCaseId, UUID provisioningCalculationId, UUID provisioningJournalId);
 
     /**
      * Updates an existing provisioning journal entry with the specified details.
@@ -49,7 +51,7 @@ public interface ProvisioningJournalService {
      * @param dto the data transfer object containing the updated details of the provisioning journal entry
      * @return a Mono emitting the updated ProvisioningJournalDTO
      */
-    Mono<ProvisioningJournalDTO> update(Long provisioningCaseId, Long provisioningCalculationId, Long provisioningJournalId,
+    Mono<ProvisioningJournalDTO> update(UUID provisioningCaseId, UUID provisioningCalculationId, UUID provisioningJournalId,
                                         ProvisioningJournalDTO dto);
 
     /**
@@ -61,5 +63,5 @@ public interface ProvisioningJournalService {
      * @param provisioningJournalId the unique identifier of the provisioning journal entry to delete
      * @return a Mono that completes when the deletion process is successful
      */
-    Mono<Void> delete(Long provisioningCaseId, Long provisioningCalculationId, Long provisioningJournalId);
+    Mono<Void> delete(UUID provisioningCaseId, UUID provisioningCalculationId, UUID provisioningJournalId);
 }

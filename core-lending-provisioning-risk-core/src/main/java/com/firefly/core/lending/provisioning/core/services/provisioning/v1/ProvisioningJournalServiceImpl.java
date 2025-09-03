@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Mono;
 
+import java.util.UUID;
+
 @Service
 @Transactional
 public class ProvisioningJournalServiceImpl implements ProvisioningJournalService {
@@ -23,7 +25,7 @@ public class ProvisioningJournalServiceImpl implements ProvisioningJournalServic
     private ProvisioningJournalMapper mapper;
 
     @Override
-    public Mono<PaginationResponse<ProvisioningJournalDTO>> findAll(Long provisioningCaseId, Long provisioningCalculationId, FilterRequest<ProvisioningJournalDTO> filterRequest) {
+    public Mono<PaginationResponse<ProvisioningJournalDTO>> findAll(UUID provisioningCaseId, UUID provisioningCalculationId, FilterRequest<ProvisioningJournalDTO> filterRequest) {
         filterRequest.getFilters().setProvisioningCalculationId(provisioningCalculationId);
         return FilterUtils.createFilter(
                 ProvisioningJournal.class,
@@ -32,7 +34,7 @@ public class ProvisioningJournalServiceImpl implements ProvisioningJournalServic
     }
 
     @Override
-    public Mono<ProvisioningJournalDTO> create(Long provisioningCaseId, Long provisioningCalculationId, ProvisioningJournalDTO dto) {
+    public Mono<ProvisioningJournalDTO> create(UUID provisioningCaseId, UUID provisioningCalculationId, ProvisioningJournalDTO dto) {
         dto.setProvisioningCalculationId(provisioningCalculationId);
         ProvisioningJournal entity = mapper.toEntity(dto);
         return Mono.just(entity)
@@ -41,14 +43,14 @@ public class ProvisioningJournalServiceImpl implements ProvisioningJournalServic
     }
 
     @Override
-    public Mono<ProvisioningJournalDTO> getById(Long provisioningCaseId, Long provisioningCalculationId, Long provisioningJournalId) {
+    public Mono<ProvisioningJournalDTO> getById(UUID provisioningCaseId, UUID provisioningCalculationId, UUID provisioningJournalId) {
         return repository.findById(provisioningJournalId)
                 .filter(entity -> provisioningCalculationId.equals(entity.getProvisioningCalculationId()))
                 .map(mapper::toDTO);
     }
 
     @Override
-    public Mono<ProvisioningJournalDTO> update(Long provisioningCaseId, Long provisioningCalculationId, Long provisioningJournalId, ProvisioningJournalDTO dto) {
+    public Mono<ProvisioningJournalDTO> update(UUID provisioningCaseId, UUID provisioningCalculationId, UUID provisioningJournalId, ProvisioningJournalDTO dto) {
         return repository.findById(provisioningJournalId)
                 .filter(entity -> provisioningCalculationId.equals(entity.getProvisioningCalculationId()))
                 .flatMap(existingEntity -> {
@@ -60,7 +62,7 @@ public class ProvisioningJournalServiceImpl implements ProvisioningJournalServic
     }
 
     @Override
-    public Mono<Void> delete(Long provisioningCaseId, Long provisioningCalculationId, Long provisioningJournalId) {
+    public Mono<Void> delete(UUID provisioningCaseId, UUID provisioningCalculationId, UUID provisioningJournalId) {
         return repository.findById(provisioningJournalId)
                 .filter(entity -> provisioningCalculationId.equals(entity.getProvisioningCalculationId()))
                 .flatMap(repository::delete);

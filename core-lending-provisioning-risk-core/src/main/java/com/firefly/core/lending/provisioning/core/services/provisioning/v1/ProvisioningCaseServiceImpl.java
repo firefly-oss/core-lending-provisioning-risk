@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Mono;
 
+import java.util.UUID;
+
 @Service
 @Transactional
 public class ProvisioningCaseServiceImpl implements ProvisioningCaseService {
@@ -38,13 +40,13 @@ public class ProvisioningCaseServiceImpl implements ProvisioningCaseService {
     }
 
     @Override
-    public Mono<ProvisioningCaseDTO> getById(Long provisioningCaseId) {
+    public Mono<ProvisioningCaseDTO> getById(UUID provisioningCaseId) {
         return repository.findById(provisioningCaseId)
                 .map(mapper::toDTO);
     }
 
     @Override
-    public Mono<ProvisioningCaseDTO> update(Long provisioningCaseId, ProvisioningCaseDTO dto) {
+    public Mono<ProvisioningCaseDTO> update(UUID provisioningCaseId, ProvisioningCaseDTO dto) {
         return repository.findById(provisioningCaseId)
                 .flatMap(existing -> {
                     mapper.toEntity(dto).setProvisioningCaseId(provisioningCaseId);
@@ -55,7 +57,7 @@ public class ProvisioningCaseServiceImpl implements ProvisioningCaseService {
     }
 
     @Override
-    public Mono<Void> delete(Long provisioningCaseId) {
+    public Mono<Void> delete(UUID provisioningCaseId) {
         return repository.findById(provisioningCaseId)
                 .flatMap(repository::delete);
     }
