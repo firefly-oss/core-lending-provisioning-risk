@@ -10,6 +10,7 @@ import org.springframework.data.relational.core.mapping.Table;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Data
 @Builder
@@ -20,13 +21,13 @@ public class ProvisioningJournal {
 
     @Id
     @Column("provisioning_journal_id")
-    private Long provisioningJournalId;
+    private UUID provisioningJournalId;
 
     @Column("provisioning_calculation_id")
-    private Long provisioningCalculationId; // FK to ProvisioningCalculation
+    private UUID provisioningCalculationId; // FK to ProvisioningCalculation
 
     @Column("accounting_journal_entry_id")
-    private Long accountingJournalEntryId;  // External reference (no direct FK)
+    private UUID accountingJournalEntryId;  // External reference (no direct FK)
 
     @Column("provision_change_amount")
     private BigDecimal provisionChangeAmount;

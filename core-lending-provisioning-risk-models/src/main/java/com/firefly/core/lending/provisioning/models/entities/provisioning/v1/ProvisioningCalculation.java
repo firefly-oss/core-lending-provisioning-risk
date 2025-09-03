@@ -11,6 +11,7 @@ import org.springframework.data.relational.core.mapping.Table;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Data
 @Builder
@@ -21,13 +22,13 @@ public class ProvisioningCalculation {
 
     @Id
     @Column("provisioning_calculation_id")
-    private Long provisioningCalculationId;
+    private UUID provisioningCalculationId;
 
     @Column("provisioning_case_id")
-    private Long provisioningCaseId; // FK to ProvisioningCase
+    private UUID provisioningCaseId; // FK to ProvisioningCase
 
     @Column("risk_assessment_id")
-    private Long riskAssessmentId;   // FK to RiskAssessment
+    private UUID riskAssessmentId;   // FK to RiskAssessment
 
     @Column("final_ecl")
     private BigDecimal finalEcl;

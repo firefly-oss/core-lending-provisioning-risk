@@ -3,5 +3,7 @@ package com.firefly.core.lending.provisioning.models.repositories.provisioning.v
 import com.firefly.core.lending.provisioning.models.entities.provisioning.v1.ProvisioningStageHistory;
 import com.firefly.core.lending.provisioning.models.repositories.BaseRepository;
 
-public interface ProvisioningStageHistoryRepository extends BaseRepository<ProvisioningStageHistory, Long> {
+import java.util.UUID;
+
+public interface ProvisioningStageHistoryRepository extends BaseRepository<ProvisioningStageHistory, UUID> {
 }

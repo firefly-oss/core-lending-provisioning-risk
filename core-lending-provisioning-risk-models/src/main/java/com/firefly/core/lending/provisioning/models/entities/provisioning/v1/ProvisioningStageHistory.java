@@ -11,6 +11,7 @@ import org.springframework.data.relational.core.mapping.Table;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Data
 @Builder
@@ -21,10 +22,10 @@ public class ProvisioningStageHistory {
 
     @Id
     @Column("provisioning_stage_history_id")
-    private Long provisioningStageHistoryId;
+    private UUID provisioningStageHistoryId;
 
     @Column("provisioning_case_id")
-    private Long provisioningCaseId; // FK to ProvisioningCase
+    private UUID provisioningCaseId; // FK to ProvisioningCase
 
     @Column("old_stage_code")
     private StageCodeEnum oldStageCode;

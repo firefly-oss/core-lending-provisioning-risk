@@ -13,6 +13,7 @@ import org.springframework.data.relational.core.mapping.Table;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Data
 @Builder
@@ -23,10 +24,10 @@ public class ProvisioningCase {
 
     @Id
     @Column("provisioning_case_id")
-    private Long provisioningCaseId;
+    private UUID provisioningCaseId;
 
     @Column("loan_servicing_case_id")
-    private Long loanServicingCaseId; // External reference (no direct FK)
+    private UUID loanServicingCaseId; // External reference (no direct FK)
 
     @Column("stage_code")
     private StageCodeEnum stageCode;  // STAGE_1, STAGE_2, STAGE_3, POCI

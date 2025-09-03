@@ -11,6 +11,7 @@ import org.springframework.data.relational.core.mapping.Table;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Data
 @Builder
@@ -21,10 +22,10 @@ public class RiskAssessment {
 
     @Id
     @Column("risk_assessment_id")
-    private Long riskAssessmentId;
+    private UUID riskAssessmentId;
 
     @Column("provisioning_case_id")
-    private Long provisioningCaseId; // FK to ProvisioningCase
+    private UUID provisioningCaseId; // FK to ProvisioningCase
 
     @Column("pd_value")
     private BigDecimal pdValue;      // Probability of Default
