@@ -18,6 +18,7 @@
         <module>core-lending-provisioning-risk-interfaces</module>
         <module>core-lending-provisioning-risk-models</module>
         <module>core-lending-provisioning-risk-web</module>
+        <module>core-lending-provisioning-risk-sdk</module>
     </modules>
 
     <properties>
@@ -37,6 +38,11 @@
             <dependency>
                 <groupId>com.firefly</groupId>
                 <artifactId>core-lending-provisioning-risk-models</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.firefly</groupId>
+                <artifactId>core-lending-provisioning-risk-sdk</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
