@@ -11,6 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
+import jakarta.validation.Valid;
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/api/v1/provisioning-cases/{provisioningCaseId}/calculations")
 @Tag(name = "ProvisioningCalculation", description = "Provisioning calculation ops under a provisioning case")
@@ -22,7 +25,7 @@ public class ProvisioningCalculationController {
     @GetMapping
     @Operation(summary = "List or search provisioning calculations for a case")
     public Mono<ResponseEntity<PaginationResponse<ProvisioningCalculationDTO>>> findAll(
-            @PathVariable Long provisioningCaseId,
+            @PathVariable UUID provisioningCaseId,
             @ModelAttribute FilterRequest<ProvisioningCalculationDTO> filterRequest) {
 
         return service.findAll(provisioningCaseId, filterRequest)
@@ -32,8 +35,8 @@ public class ProvisioningCalculationController {
     @PostMapping
     @Operation(summary = "Create a new provisioning calculation")
     public Mono<ResponseEntity<ProvisioningCalculationDTO>> create(
-            @PathVariable Long provisioningCaseId,
-            @RequestBody ProvisioningCalculationDTO dto) {
+            @PathVariable UUID provisioningCaseId,
+            @Valid @RequestBody ProvisioningCalculationDTO dto) {
 
         return service.create(provisioningCaseId, dto)
                 .map(ResponseEntity::ok);
@@ -42,8 +45,8 @@ public class ProvisioningCalculationController {
     @GetMapping("/{provisioningCalculationId}")
     @Operation(summary = "Get a provisioning calculation by ID")
     public Mono<ResponseEntity<ProvisioningCalculationDTO>> getById(
-            @PathVariable Long provisioningCaseId,
-            @PathVariable Long provisioningCalculationId) {
+            @PathVariable UUID provisioningCaseId,
+            @PathVariable UUID provisioningCalculationId) {
 
         return service.getById(provisioningCaseId, provisioningCalculationId)
                 .map(ResponseEntity::ok);
@@ -52,9 +55,9 @@ public class ProvisioningCalculationController {
     @PutMapping("/{provisioningCalculationId}")
     @Operation(summary = "Update a provisioning calculation")
     public Mono<ResponseEntity<ProvisioningCalculationDTO>> update(
-            @PathVariable Long provisioningCaseId,
-            @PathVariable Long provisioningCalculationId,
-            @RequestBody ProvisioningCalculationDTO dto) {
+            @PathVariable UUID provisioningCaseId,
+            @PathVariable UUID provisioningCalculationId,
+            @Valid @RequestBody ProvisioningCalculationDTO dto) {
 
         return service.update(provisioningCaseId, provisioningCalculationId, dto)
                 .map(ResponseEntity::ok);
@@ -63,8 +66,8 @@ public class ProvisioningCalculationController {
     @DeleteMapping("/{provisioningCalculationId}")
     @Operation(summary = "Delete a provisioning calculation")
     public Mono<ResponseEntity<Void>> delete(
-            @PathVariable Long provisioningCaseId,
-            @PathVariable Long provisioningCalculationId) {
+            @PathVariable UUID provisioningCaseId,
+            @PathVariable UUID provisioningCalculationId) {
 
         return service.delete(provisioningCaseId, provisioningCalculationId)
                 .thenReturn(ResponseEntity.noContent().build());

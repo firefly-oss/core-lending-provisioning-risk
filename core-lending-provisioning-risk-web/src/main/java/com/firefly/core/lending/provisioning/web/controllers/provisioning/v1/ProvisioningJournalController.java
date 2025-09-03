@@ -11,6 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
+import jakarta.validation.Valid;
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/api/v1/provisioning-cases/{provisioningCaseId}/calculations/{provisioningCalculationId}/journal")
 @Tag(name = "ProvisioningJournal", description = "Provisioning journal entries for a specific calculation")
@@ -22,8 +25,8 @@ public class ProvisioningJournalController {
     @GetMapping
     @Operation(summary = "List or search provisioning journal entries for a calculation")
     public Mono<ResponseEntity<PaginationResponse<ProvisioningJournalDTO>>> findAll(
-            @PathVariable Long provisioningCaseId,
-            @PathVariable Long provisioningCalculationId,
+            @PathVariable UUID provisioningCaseId,
+            @PathVariable UUID provisioningCalculationId,
             @ModelAttribute FilterRequest<ProvisioningJournalDTO> filterRequest) {
 
         return service.findAll(provisioningCaseId, provisioningCalculationId, filterRequest)
@@ -33,9 +36,9 @@ public class ProvisioningJournalController {
     @PostMapping
     @Operation(summary = "Create a new provisioning journal entry")
     public Mono<ResponseEntity<ProvisioningJournalDTO>> create(
-            @PathVariable Long provisioningCaseId,
-            @PathVariable Long provisioningCalculationId,
-            @RequestBody ProvisioningJournalDTO dto) {
+            @PathVariable UUID provisioningCaseId,
+            @PathVariable UUID provisioningCalculationId,
+            @Valid @RequestBody ProvisioningJournalDTO dto) {
 
         return service.create(provisioningCaseId, provisioningCalculationId, dto)
                 .map(ResponseEntity::ok);
@@ -44,9 +47,9 @@ public class ProvisioningJournalController {
     @GetMapping("/{provisioningJournalId}")
     @Operation(summary = "Get a provisioning journal entry by ID")
     public Mono<ResponseEntity<ProvisioningJournalDTO>> getById(
-            @PathVariable Long provisioningCaseId,
-            @PathVariable Long provisioningCalculationId,
-            @PathVariable Long provisioningJournalId) {
+            @PathVariable UUID provisioningCaseId,
+            @PathVariable UUID provisioningCalculationId,
+            @PathVariable UUID provisioningJournalId) {
 
         return service.getById(provisioningCaseId, provisioningCalculationId, provisioningJournalId)
                 .map(ResponseEntity::ok);
@@ -55,10 +58,10 @@ public class ProvisioningJournalController {
     @PutMapping("/{provisioningJournalId}")
     @Operation(summary = "Update a provisioning journal entry")
     public Mono<ResponseEntity<ProvisioningJournalDTO>> update(
-            @PathVariable Long provisioningCaseId,
-            @PathVariable Long provisioningCalculationId,
-            @PathVariable Long provisioningJournalId,
-            @RequestBody ProvisioningJournalDTO dto) {
+            @PathVariable UUID provisioningCaseId,
+            @PathVariable UUID provisioningCalculationId,
+            @PathVariable UUID provisioningJournalId,
+            @Valid @RequestBody ProvisioningJournalDTO dto) {
 
         return service.update(provisioningCaseId, provisioningCalculationId, provisioningJournalId, dto)
                 .map(ResponseEntity::ok);
@@ -67,9 +70,9 @@ public class ProvisioningJournalController {
     @DeleteMapping("/{provisioningJournalId}")
     @Operation(summary = "Delete a provisioning journal entry")
     public Mono<ResponseEntity<Void>> delete(
-            @PathVariable Long provisioningCaseId,
-            @PathVariable Long provisioningCalculationId,
-            @PathVariable Long provisioningJournalId) {
+            @PathVariable UUID provisioningCaseId,
+            @PathVariable UUID provisioningCalculationId,
+            @PathVariable UUID provisioningJournalId) {
 
         return service.delete(provisioningCaseId, provisioningCalculationId, provisioningJournalId)
                 .thenReturn(ResponseEntity.noContent().build());

@@ -11,6 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
+import jakarta.validation.Valid;
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/api/v1/provisioning-cases")
 @Tag(name = "ProvisioningCase", description = "Operations on Provisioning Cases")
@@ -30,7 +33,7 @@ public class ProvisioningCaseController {
 
     @PostMapping
     @Operation(summary = "Create a new provisioning case")
-    public Mono<ResponseEntity<ProvisioningCaseDTO>> create(@RequestBody ProvisioningCaseDTO dto) {
+    public Mono<ResponseEntity<ProvisioningCaseDTO>> create(@Valid @RequestBody ProvisioningCaseDTO dto) {
         return service.create(dto)
                 .map(ResponseEntity::ok);
     }
@@ -38,7 +41,7 @@ public class ProvisioningCaseController {
     @GetMapping("/{provisioningCaseId}")
     @Operation(summary = "Get a provisioning case by ID")
     public Mono<ResponseEntity<ProvisioningCaseDTO>> getById(
-            @PathVariable Long provisioningCaseId) {
+            @PathVariable UUID provisioningCaseId) {
 
         return service.getById(provisioningCaseId)
                 .map(ResponseEntity::ok);
@@ -47,8 +50,8 @@ public class ProvisioningCaseController {
     @PutMapping("/{provisioningCaseId}")
     @Operation(summary = "Update a provisioning case")
     public Mono<ResponseEntity<ProvisioningCaseDTO>> update(
-            @PathVariable Long provisioningCaseId,
-            @RequestBody ProvisioningCaseDTO dto) {
+            @PathVariable UUID provisioningCaseId,
+            @Valid @RequestBody ProvisioningCaseDTO dto) {
 
         return service.update(provisioningCaseId, dto)
                 .map(ResponseEntity::ok);
@@ -57,7 +60,7 @@ public class ProvisioningCaseController {
     @DeleteMapping("/{provisioningCaseId}")
     @Operation(summary = "Delete a provisioning case")
     public Mono<ResponseEntity<Void>> delete(
-            @PathVariable Long provisioningCaseId) {
+            @PathVariable UUID provisioningCaseId) {
 
         return service.delete(provisioningCaseId)
                 .thenReturn(ResponseEntity.noContent().build());

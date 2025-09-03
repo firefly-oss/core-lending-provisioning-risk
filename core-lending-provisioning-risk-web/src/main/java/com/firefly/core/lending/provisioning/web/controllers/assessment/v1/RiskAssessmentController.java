@@ -11,6 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
+import jakarta.validation.Valid;
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/api/v1/provisioning-cases/{provisioningCaseId}/risk-assessments")
 @Tag(name = "RiskAssessment", description = "Risk assessment operations under a provisioning case")
@@ -22,7 +25,7 @@ public class RiskAssessmentController {
     @GetMapping
     @Operation(summary = "List or search risk assessments for a provisioning case")
     public Mono<ResponseEntity<PaginationResponse<RiskAssessmentDTO>>> findAll(
-            @PathVariable Long provisioningCaseId,
+            @PathVariable UUID provisioningCaseId,
             @ModelAttribute FilterRequest<RiskAssessmentDTO> filterRequest) {
 
         return service.findAll(provisioningCaseId, filterRequest)
@@ -32,8 +35,8 @@ public class RiskAssessmentController {
     @PostMapping
     @Operation(summary = "Create a new risk assessment")
     public Mono<ResponseEntity<RiskAssessmentDTO>> create(
-            @PathVariable Long provisioningCaseId,
-            @RequestBody RiskAssessmentDTO dto) {
+            @PathVariable UUID provisioningCaseId,
+            @Valid @RequestBody RiskAssessmentDTO dto) {
 
         return service.create(provisioningCaseId, dto)
                 .map(ResponseEntity::ok);
@@ -42,8 +45,8 @@ public class RiskAssessmentController {
     @GetMapping("/{riskAssessmentId}")
     @Operation(summary = "Get a risk assessment by ID")
     public Mono<ResponseEntity<RiskAssessmentDTO>> getById(
-            @PathVariable Long provisioningCaseId,
-            @PathVariable Long riskAssessmentId) {
+            @PathVariable UUID provisioningCaseId,
+            @PathVariable UUID riskAssessmentId) {
 
         return service.getById(provisioningCaseId, riskAssessmentId)
                 .map(ResponseEntity::ok);
@@ -52,9 +55,9 @@ public class RiskAssessmentController {
     @PutMapping("/{riskAssessmentId}")
     @Operation(summary = "Update a risk assessment")
     public Mono<ResponseEntity<RiskAssessmentDTO>> update(
-            @PathVariable Long provisioningCaseId,
-            @PathVariable Long riskAssessmentId,
-            @RequestBody RiskAssessmentDTO dto) {
+            @PathVariable UUID provisioningCaseId,
+            @PathVariable UUID riskAssessmentId,
+            @Valid @RequestBody RiskAssessmentDTO dto) {
 
         return service.update(provisioningCaseId, riskAssessmentId, dto)
                 .map(ResponseEntity::ok);
@@ -63,8 +66,8 @@ public class RiskAssessmentController {
     @DeleteMapping("/{riskAssessmentId}")
     @Operation(summary = "Delete a risk assessment")
     public Mono<ResponseEntity<Void>> delete(
-            @PathVariable Long provisioningCaseId,
-            @PathVariable Long riskAssessmentId) {
+            @PathVariable UUID provisioningCaseId,
+            @PathVariable UUID riskAssessmentId) {
 
         return service.delete(provisioningCaseId, riskAssessmentId)
                 .thenReturn(ResponseEntity.noContent().build());
