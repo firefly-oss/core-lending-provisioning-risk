@@ -1,0 +1,1886 @@
+openapi: 3.0.1
+info:
+  title: core-lending-provisioning-risk
+  description: Provisioning Risk Core Application
+  contact:
+    name: Firefly Software Solutions Inc
+    email: dev@getfirefly.io
+  version: 1.0.0
+servers:
+  - url: http://core.catalis.vc/loan-origination
+    description: Development Environment
+  - url: /
+    description: Local Development Environment
+tags:
+  - name: ProvisioningCalculation
+    description: Provisioning calculation ops under a provisioning case
+  - name: ProvisioningStageHistory
+    description: Stage history operations under a provisioning case
+  - name: ProvisioningJournal
+    description: Provisioning journal entries for a specific calculation
+  - name: ProvisioningCase
+    description: Operations on Provisioning Cases
+  - name: RiskAssessment
+    description: Risk assessment operations under a provisioning case
+paths:
+  /api/v1/provisioning-cases/{provisioningCaseId}:
+    get:
+      tags:
+        - ProvisioningCase
+      summary: Get a provisioning case by ID
+      operationId: getById
+      parameters:
+        - name: provisioningCaseId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ProvisioningCaseDTO'
+    put:
+      tags:
+        - ProvisioningCase
+      summary: Update a provisioning case
+      operationId: update
+      parameters:
+        - name: provisioningCaseId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: X-Idempotency-Key
+          in: header
+          description: Unique key for idempotent requests. If provided, ensures that identical requests with the same key will only be processed once.
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProvisioningCaseDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ProvisioningCaseDTO'
+    delete:
+      tags:
+        - ProvisioningCase
+      summary: Delete a provisioning case
+      operationId: delete
+      parameters:
+        - name: provisioningCaseId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+  /api/v1/provisioning-cases/{provisioningCaseId}/stage-history/{provisioningStageHistoryId}:
+    get:
+      tags:
+        - ProvisioningStageHistory
+      summary: Get a stage history entry by ID
+      operationId: getById_1
+      parameters:
+        - name: provisioningCaseId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: provisioningStageHistoryId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ProvisioningStageHistoryDTO'
+    put:
+      tags:
+        - ProvisioningStageHistory
+      summary: Update a stage history entry
+      operationId: update_1
+      parameters:
+        - name: provisioningCaseId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: provisioningStageHistoryId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: X-Idempotency-Key
+          in: header
+          description: Unique key for idempotent requests. If provided, ensures that identical requests with the same key will only be processed once.
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProvisioningStageHistoryDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ProvisioningStageHistoryDTO'
+    delete:
+      tags:
+        - ProvisioningStageHistory
+      summary: Delete a stage history entry
+      operationId: delete_1
+      parameters:
+        - name: provisioningCaseId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: provisioningStageHistoryId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+  /api/v1/provisioning-cases/{provisioningCaseId}/risk-assessments/{riskAssessmentId}:
+    get:
+      tags:
+        - RiskAssessment
+      summary: Get a risk assessment by ID
+      operationId: getById_2
+      parameters:
+        - name: provisioningCaseId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: riskAssessmentId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RiskAssessmentDTO'
+    put:
+      tags:
+        - RiskAssessment
+      summary: Update a risk assessment
+      operationId: update_2
+      parameters:
+        - name: provisioningCaseId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: riskAssessmentId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: X-Idempotency-Key
+          in: header
+          description: Unique key for idempotent requests. If provided, ensures that identical requests with the same key will only be processed once.
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RiskAssessmentDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RiskAssessmentDTO'
+    delete:
+      tags:
+        - RiskAssessment
+      summary: Delete a risk assessment
+      operationId: delete_2
+      parameters:
+        - name: provisioningCaseId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: riskAssessmentId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+  /api/v1/provisioning-cases/{provisioningCaseId}/calculations/{provisioningCalculationId}:
+    get:
+      tags:
+        - ProvisioningCalculation
+      summary: Get a provisioning calculation by ID
+      operationId: getById_3
+      parameters:
+        - name: provisioningCaseId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: provisioningCalculationId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ProvisioningCalculationDTO'
+    put:
+      tags:
+        - ProvisioningCalculation
+      summary: Update a provisioning calculation
+      operationId: update_3
+      parameters:
+        - name: provisioningCaseId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: provisioningCalculationId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: X-Idempotency-Key
+          in: header
+          description: Unique key for idempotent requests. If provided, ensures that identical requests with the same key will only be processed once.
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProvisioningCalculationDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ProvisioningCalculationDTO'
+    delete:
+      tags:
+        - ProvisioningCalculation
+      summary: Delete a provisioning calculation
+      operationId: delete_3
+      parameters:
+        - name: provisioningCaseId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: provisioningCalculationId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+  /api/v1/provisioning-cases/{provisioningCaseId}/calculations/{provisioningCalculationId}/journal/{provisioningJournalId}:
+    get:
+      tags:
+        - ProvisioningJournal
+      summary: Get a provisioning journal entry by ID
+      operationId: getById_4
+      parameters:
+        - name: provisioningCaseId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: provisioningCalculationId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: provisioningJournalId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ProvisioningJournalDTO'
+    put:
+      tags:
+        - ProvisioningJournal
+      summary: Update a provisioning journal entry
+      operationId: update_4
+      parameters:
+        - name: provisioningCaseId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: provisioningCalculationId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: provisioningJournalId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: X-Idempotency-Key
+          in: header
+          description: Unique key for idempotent requests. If provided, ensures that identical requests with the same key will only be processed once.
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProvisioningJournalDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ProvisioningJournalDTO'
+    delete:
+      tags:
+        - ProvisioningJournal
+      summary: Delete a provisioning journal entry
+      operationId: delete_4
+      parameters:
+        - name: provisioningCaseId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: provisioningCalculationId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: provisioningJournalId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+  /api/v1/provisioning-cases:
+    get:
+      tags:
+        - ProvisioningCase
+      summary: List or search provisioning cases
+      operationId: findAll
+      parameters:
+        - name: pagination.pageNumber
+          in: query
+          description: Page number (0-based)
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: pagination.pageSize
+          in: query
+          description: Number of items per page
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 10
+        - name: pagination.sortBy
+          in: query
+          description: Field to sort by
+          required: false
+          schema:
+            type: string
+        - name: pagination.sortDirection
+          in: query
+          description: Sort direction (ASC or DESC)
+          required: false
+          schema:
+            type: string
+            default: DESC
+        - name: options.caseInsensitiveStrings
+          in: query
+          description: Enable case-insensitive string filtering
+          required: false
+          schema:
+            type: boolean
+            default: false
+        - name: options.includeInheritedFields
+          in: query
+          description: Include fields from parent classes
+          required: false
+          schema:
+            type: boolean
+            default: false
+        - name: filters.loanServicingCaseId
+          in: query
+          description: Exact filter for loan servicing case id
+          required: false
+          schema:
+            type: string
+        - name: filters.stageCode
+          in: query
+          description: Exact filter for stage code
+          required: false
+          schema:
+            type: string
+            enum:
+              - STAGE_1
+              - STAGE_2
+              - STAGE_3
+              - POCI
+        - name: filters.eclAmount
+          in: query
+          description: Exact filter for ecl amount
+          required: false
+          schema:
+            type: string
+        - name: rangeFilters.ranges[eclAmount].from
+          in: query
+          description: Filter ecl amount from value
+          required: false
+          schema:
+            type: string
+        - name: rangeFilters.ranges[eclAmount].to
+          in: query
+          description: Filter ecl amount to value
+          required: false
+          schema:
+            type: string
+        - name: filters.riskGrade
+          in: query
+          description: Exact filter for risk grade
+          required: false
+          schema:
+            type: string
+            enum:
+              - AAA
+              - AA
+              - A
+              - BBB
+              - BB
+              - B
+              - CCC
+              - CC
+              - C
+              - D
+        - name: filters.lastCalculatedAt
+          in: query
+          description: Exact filter for last calculated at
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: rangeFilters.ranges[lastCalculatedAt].from
+          in: query
+          description: Filter last calculated at from value
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: rangeFilters.ranges[lastCalculatedAt].to
+          in: query
+          description: Filter last calculated at to value
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: filters.provisioningStatus
+          in: query
+          description: Exact filter for provisioning status
+          required: false
+          schema:
+            type: string
+            enum:
+              - ACTIVE
+              - RELEASED
+              - WRITTEN_OFF
+              - RECOVERED
+        - name: filters.remarks
+          in: query
+          description: Exact filter for remarks
+          required: false
+          schema:
+            type: string
+        - name: filters.createdAt
+          in: query
+          description: Exact filter for created at
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: rangeFilters.ranges[createdAt].from
+          in: query
+          description: Filter created at from value
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: rangeFilters.ranges[createdAt].to
+          in: query
+          description: Filter created at to value
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: filters.updatedAt
+          in: query
+          description: Exact filter for updated at
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: rangeFilters.ranges[updatedAt].from
+          in: query
+          description: Filter updated at from value
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: rangeFilters.ranges[updatedAt].to
+          in: query
+          description: Filter updated at to value
+          required: false
+          schema:
+            type: string
+            format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PaginationResponseProvisioningCaseDTO'
+    post:
+      tags:
+        - ProvisioningCase
+      summary: Create a new provisioning case
+      operationId: create
+      parameters:
+        - name: X-Idempotency-Key
+          in: header
+          description: Unique key for idempotent requests. If provided, ensures that identical requests with the same key will only be processed once.
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProvisioningCaseDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ProvisioningCaseDTO'
+  /api/v1/provisioning-cases/{provisioningCaseId}/stage-history:
+    get:
+      tags:
+        - ProvisioningStageHistory
+      summary: List or search stage history for a provisioning case
+      operationId: findAll_1
+      parameters:
+        - name: provisioningCaseId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: pagination.pageNumber
+          in: query
+          description: Page number (0-based)
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: pagination.pageSize
+          in: query
+          description: Number of items per page
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 10
+        - name: pagination.sortBy
+          in: query
+          description: Field to sort by
+          required: false
+          schema:
+            type: string
+        - name: pagination.sortDirection
+          in: query
+          description: Sort direction (ASC or DESC)
+          required: false
+          schema:
+            type: string
+            default: DESC
+        - name: options.caseInsensitiveStrings
+          in: query
+          description: Enable case-insensitive string filtering
+          required: false
+          schema:
+            type: boolean
+            default: false
+        - name: options.includeInheritedFields
+          in: query
+          description: Include fields from parent classes
+          required: false
+          schema:
+            type: boolean
+            default: false
+        - name: filters.provisioningCaseId
+          in: query
+          description: Exact filter for provisioning case id
+          required: false
+          schema:
+            type: string
+        - name: filters.oldStageCode
+          in: query
+          description: Exact filter for old stage code
+          required: false
+          schema:
+            type: string
+            enum:
+              - STAGE_1
+              - STAGE_2
+              - STAGE_3
+              - POCI
+        - name: filters.newStageCode
+          in: query
+          description: Exact filter for new stage code
+          required: false
+          schema:
+            type: string
+            enum:
+              - STAGE_1
+              - STAGE_2
+              - STAGE_3
+              - POCI
+        - name: filters.eclAmountAtChange
+          in: query
+          description: Exact filter for ecl amount at change
+          required: false
+          schema:
+            type: string
+        - name: rangeFilters.ranges[eclAmountAtChange].from
+          in: query
+          description: Filter ecl amount at change from value
+          required: false
+          schema:
+            type: string
+        - name: rangeFilters.ranges[eclAmountAtChange].to
+          in: query
+          description: Filter ecl amount at change to value
+          required: false
+          schema:
+            type: string
+        - name: filters.changedAt
+          in: query
+          description: Exact filter for changed at
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: rangeFilters.ranges[changedAt].from
+          in: query
+          description: Filter changed at from value
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: rangeFilters.ranges[changedAt].to
+          in: query
+          description: Filter changed at to value
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: filters.changedBy
+          in: query
+          description: Exact filter for changed by
+          required: false
+          schema:
+            type: string
+        - name: filters.reason
+          in: query
+          description: Exact filter for reason
+          required: false
+          schema:
+            type: string
+        - name: filters.createdAt
+          in: query
+          description: Exact filter for created at
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: rangeFilters.ranges[createdAt].from
+          in: query
+          description: Filter created at from value
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: rangeFilters.ranges[createdAt].to
+          in: query
+          description: Filter created at to value
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: filters.updatedAt
+          in: query
+          description: Exact filter for updated at
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: rangeFilters.ranges[updatedAt].from
+          in: query
+          description: Filter updated at from value
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: rangeFilters.ranges[updatedAt].to
+          in: query
+          description: Filter updated at to value
+          required: false
+          schema:
+            type: string
+            format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PaginationResponseProvisioningStageHistoryDTO'
+    post:
+      tags:
+        - ProvisioningStageHistory
+      summary: Create a new stage history entry
+      operationId: create_1
+      parameters:
+        - name: provisioningCaseId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: X-Idempotency-Key
+          in: header
+          description: Unique key for idempotent requests. If provided, ensures that identical requests with the same key will only be processed once.
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProvisioningStageHistoryDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ProvisioningStageHistoryDTO'
+  /api/v1/provisioning-cases/{provisioningCaseId}/risk-assessments:
+    get:
+      tags:
+        - RiskAssessment
+      summary: List or search risk assessments for a provisioning case
+      operationId: findAll_2
+      parameters:
+        - name: provisioningCaseId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: pagination.pageNumber
+          in: query
+          description: Page number (0-based)
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: pagination.pageSize
+          in: query
+          description: Number of items per page
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 10
+        - name: pagination.sortBy
+          in: query
+          description: Field to sort by
+          required: false
+          schema:
+            type: string
+        - name: pagination.sortDirection
+          in: query
+          description: Sort direction (ASC or DESC)
+          required: false
+          schema:
+            type: string
+            default: DESC
+        - name: options.caseInsensitiveStrings
+          in: query
+          description: Enable case-insensitive string filtering
+          required: false
+          schema:
+            type: boolean
+            default: false
+        - name: options.includeInheritedFields
+          in: query
+          description: Include fields from parent classes
+          required: false
+          schema:
+            type: boolean
+            default: false
+        - name: filters.provisioningCaseId
+          in: query
+          description: Exact filter for provisioning case id
+          required: false
+          schema:
+            type: string
+        - name: filters.pdValue
+          in: query
+          description: Exact filter for pd value
+          required: false
+          schema:
+            type: string
+        - name: rangeFilters.ranges[pdValue].from
+          in: query
+          description: Filter pd value from value
+          required: false
+          schema:
+            type: string
+        - name: rangeFilters.ranges[pdValue].to
+          in: query
+          description: Filter pd value to value
+          required: false
+          schema:
+            type: string
+        - name: filters.lgdValue
+          in: query
+          description: Exact filter for lgd value
+          required: false
+          schema:
+            type: string
+        - name: rangeFilters.ranges[lgdValue].from
+          in: query
+          description: Filter lgd value from value
+          required: false
+          schema:
+            type: string
+        - name: rangeFilters.ranges[lgdValue].to
+          in: query
+          description: Filter lgd value to value
+          required: false
+          schema:
+            type: string
+        - name: filters.eadValue
+          in: query
+          description: Exact filter for ead value
+          required: false
+          schema:
+            type: string
+        - name: rangeFilters.ranges[eadValue].from
+          in: query
+          description: Filter ead value from value
+          required: false
+          schema:
+            type: string
+        - name: rangeFilters.ranges[eadValue].to
+          in: query
+          description: Filter ead value to value
+          required: false
+          schema:
+            type: string
+        - name: filters.modelVersion
+          in: query
+          description: Exact filter for model version
+          required: false
+          schema:
+            type: string
+        - name: filters.scenarioCode
+          in: query
+          description: Exact filter for scenario code
+          required: false
+          schema:
+            type: string
+            enum:
+              - BASE
+              - OPTIMISTIC
+              - ADVERSE
+              - SEVERE
+        - name: filters.assessmentDate
+          in: query
+          description: Exact filter for assessment date
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: rangeFilters.ranges[assessmentDate].from
+          in: query
+          description: Filter assessment date from value
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: rangeFilters.ranges[assessmentDate].to
+          in: query
+          description: Filter assessment date to value
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: filters.details
+          in: query
+          description: Exact filter for details
+          required: false
+          schema:
+            type: string
+        - name: filters.createdAt
+          in: query
+          description: Exact filter for created at
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: rangeFilters.ranges[createdAt].from
+          in: query
+          description: Filter created at from value
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: rangeFilters.ranges[createdAt].to
+          in: query
+          description: Filter created at to value
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: filters.updatedAt
+          in: query
+          description: Exact filter for updated at
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: rangeFilters.ranges[updatedAt].from
+          in: query
+          description: Filter updated at from value
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: rangeFilters.ranges[updatedAt].to
+          in: query
+          description: Filter updated at to value
+          required: false
+          schema:
+            type: string
+            format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PaginationResponseRiskAssessmentDTO'
+    post:
+      tags:
+        - RiskAssessment
+      summary: Create a new risk assessment
+      operationId: create_2
+      parameters:
+        - name: provisioningCaseId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: X-Idempotency-Key
+          in: header
+          description: Unique key for idempotent requests. If provided, ensures that identical requests with the same key will only be processed once.
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RiskAssessmentDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RiskAssessmentDTO'
+  /api/v1/provisioning-cases/{provisioningCaseId}/calculations:
+    get:
+      tags:
+        - ProvisioningCalculation
+      summary: List or search provisioning calculations for a case
+      operationId: findAll_3
+      parameters:
+        - name: provisioningCaseId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: pagination.pageNumber
+          in: query
+          description: Page number (0-based)
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: pagination.pageSize
+          in: query
+          description: Number of items per page
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 10
+        - name: pagination.sortBy
+          in: query
+          description: Field to sort by
+          required: false
+          schema:
+            type: string
+        - name: pagination.sortDirection
+          in: query
+          description: Sort direction (ASC or DESC)
+          required: false
+          schema:
+            type: string
+            default: DESC
+        - name: options.caseInsensitiveStrings
+          in: query
+          description: Enable case-insensitive string filtering
+          required: false
+          schema:
+            type: boolean
+            default: false
+        - name: options.includeInheritedFields
+          in: query
+          description: Include fields from parent classes
+          required: false
+          schema:
+            type: boolean
+            default: false
+        - name: filters.provisioningCaseId
+          in: query
+          description: Exact filter for provisioning case id
+          required: false
+          schema:
+            type: string
+        - name: filters.riskAssessmentId
+          in: query
+          description: Exact filter for risk assessment id
+          required: false
+          schema:
+            type: string
+        - name: filters.finalEcl
+          in: query
+          description: Exact filter for final ecl
+          required: false
+          schema:
+            type: string
+        - name: rangeFilters.ranges[finalEcl].from
+          in: query
+          description: Filter final ecl from value
+          required: false
+          schema:
+            type: string
+        - name: rangeFilters.ranges[finalEcl].to
+          in: query
+          description: Filter final ecl to value
+          required: false
+          schema:
+            type: string
+        - name: filters.calcMethod
+          in: query
+          description: Exact filter for calc method
+          required: false
+          schema:
+            type: string
+            enum:
+              - TWELVE_MONTH_ECL
+              - LIFETIME_ECL
+              - EXPERT_OVERRIDE
+        - name: filters.calcTimestamp
+          in: query
+          description: Exact filter for calc timestamp
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: rangeFilters.ranges[calcTimestamp].from
+          in: query
+          description: Filter calc timestamp from value
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: rangeFilters.ranges[calcTimestamp].to
+          in: query
+          description: Filter calc timestamp to value
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: filters.notes
+          in: query
+          description: Exact filter for notes
+          required: false
+          schema:
+            type: string
+        - name: filters.createdAt
+          in: query
+          description: Exact filter for created at
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: rangeFilters.ranges[createdAt].from
+          in: query
+          description: Filter created at from value
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: rangeFilters.ranges[createdAt].to
+          in: query
+          description: Filter created at to value
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: filters.updatedAt
+          in: query
+          description: Exact filter for updated at
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: rangeFilters.ranges[updatedAt].from
+          in: query
+          description: Filter updated at from value
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: rangeFilters.ranges[updatedAt].to
+          in: query
+          description: Filter updated at to value
+          required: false
+          schema:
+            type: string
+            format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PaginationResponseProvisioningCalculationDTO'
+    post:
+      tags:
+        - ProvisioningCalculation
+      summary: Create a new provisioning calculation
+      operationId: create_3
+      parameters:
+        - name: provisioningCaseId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: X-Idempotency-Key
+          in: header
+          description: Unique key for idempotent requests. If provided, ensures that identical requests with the same key will only be processed once.
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProvisioningCalculationDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ProvisioningCalculationDTO'
+  /api/v1/provisioning-cases/{provisioningCaseId}/calculations/{provisioningCalculationId}/journal:
+    get:
+      tags:
+        - ProvisioningJournal
+      summary: List or search provisioning journal entries for a calculation
+      operationId: findAll_4
+      parameters:
+        - name: provisioningCaseId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: provisioningCalculationId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: pagination.pageNumber
+          in: query
+          description: Page number (0-based)
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 0
+        - name: pagination.pageSize
+          in: query
+          description: Number of items per page
+          required: false
+          schema:
+            type: integer
+            format: int32
+            default: 10
+        - name: pagination.sortBy
+          in: query
+          description: Field to sort by
+          required: false
+          schema:
+            type: string
+        - name: pagination.sortDirection
+          in: query
+          description: Sort direction (ASC or DESC)
+          required: false
+          schema:
+            type: string
+            default: DESC
+        - name: options.caseInsensitiveStrings
+          in: query
+          description: Enable case-insensitive string filtering
+          required: false
+          schema:
+            type: boolean
+            default: false
+        - name: options.includeInheritedFields
+          in: query
+          description: Include fields from parent classes
+          required: false
+          schema:
+            type: boolean
+            default: false
+        - name: filters.provisioningCalculationId
+          in: query
+          description: Exact filter for provisioning calculation id
+          required: false
+          schema:
+            type: string
+        - name: filters.accountingJournalEntryId
+          in: query
+          description: Exact filter for accounting journal entry id
+          required: false
+          schema:
+            type: string
+        - name: filters.provisionChangeAmount
+          in: query
+          description: Exact filter for provision change amount
+          required: false
+          schema:
+            type: string
+        - name: rangeFilters.ranges[provisionChangeAmount].from
+          in: query
+          description: Filter provision change amount from value
+          required: false
+          schema:
+            type: string
+        - name: rangeFilters.ranges[provisionChangeAmount].to
+          in: query
+          description: Filter provision change amount to value
+          required: false
+          schema:
+            type: string
+        - name: filters.postedAt
+          in: query
+          description: Exact filter for posted at
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: rangeFilters.ranges[postedAt].from
+          in: query
+          description: Filter posted at from value
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: rangeFilters.ranges[postedAt].to
+          in: query
+          description: Filter posted at to value
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: filters.postingDescription
+          in: query
+          description: Exact filter for posting description
+          required: false
+          schema:
+            type: string
+        - name: filters.isReversal
+          in: query
+          description: Exact filter for is reversal
+          required: false
+          schema:
+            type: boolean
+        - name: filters.createdAt
+          in: query
+          description: Exact filter for created at
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: rangeFilters.ranges[createdAt].from
+          in: query
+          description: Filter created at from value
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: rangeFilters.ranges[createdAt].to
+          in: query
+          description: Filter created at to value
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: filters.updatedAt
+          in: query
+          description: Exact filter for updated at
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: rangeFilters.ranges[updatedAt].from
+          in: query
+          description: Filter updated at from value
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: rangeFilters.ranges[updatedAt].to
+          in: query
+          description: Filter updated at to value
+          required: false
+          schema:
+            type: string
+            format: date-time
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PaginationResponseProvisioningJournalDTO'
+    post:
+      tags:
+        - ProvisioningJournal
+      summary: Create a new provisioning journal entry
+      operationId: create_4
+      parameters:
+        - name: provisioningCaseId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: provisioningCalculationId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: X-Idempotency-Key
+          in: header
+          description: Unique key for idempotent requests. If provided, ensures that identical requests with the same key will only be processed once.
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProvisioningJournalDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ProvisioningJournalDTO'
+components:
+  schemas:
+    ProvisioningCaseDTO:
+      required:
+        - loanServicingCaseId
+        - provisioningStatus
+        - riskGrade
+        - stageCode
+      type: object
+      properties:
+        provisioningCaseId:
+          type: string
+          format: uuid
+          readOnly: true
+        loanServicingCaseId:
+          type: string
+          format: uuid
+        stageCode:
+          type: string
+          enum:
+            - STAGE_1
+            - STAGE_2
+            - STAGE_3
+            - POCI
+        eclAmount:
+          type: number
+        riskGrade:
+          type: string
+          enum:
+            - AAA
+            - AA
+            - A
+            - BBB
+            - BB
+            - B
+            - CCC
+            - CC
+            - C
+            - D
+        lastCalculatedAt:
+          type: string
+          format: date-time
+        provisioningStatus:
+          type: string
+          enum:
+            - ACTIVE
+            - RELEASED
+            - WRITTEN_OFF
+            - RECOVERED
+        remarks:
+          maxLength: 1000
+          minLength: 0
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+        updatedAt:
+          type: string
+          format: date-time
+          readOnly: true
+    ProvisioningStageHistoryDTO:
+      required:
+        - changedAt
+        - changedBy
+        - eclAmountAtChange
+        - newStageCode
+        - oldStageCode
+        - provisioningCaseId
+        - reason
+      type: object
+      properties:
+        provisioningStageHistoryId:
+          type: string
+          format: uuid
+          readOnly: true
+        provisioningCaseId:
+          type: string
+          format: uuid
+        oldStageCode:
+          type: string
+          enum:
+            - STAGE_1
+            - STAGE_2
+            - STAGE_3
+            - POCI
+        newStageCode:
+          type: string
+          enum:
+            - STAGE_1
+            - STAGE_2
+            - STAGE_3
+            - POCI
+        eclAmountAtChange:
+          type: number
+        changedAt:
+          type: string
+          format: date-time
+        changedBy:
+          maxLength: 100
+          minLength: 0
+          type: string
+        reason:
+          maxLength: 500
+          minLength: 0
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+        updatedAt:
+          type: string
+          format: date-time
+          readOnly: true
+    RiskAssessmentDTO:
+      required:
+        - assessmentDate
+        - eadValue
+        - lgdValue
+        - modelVersion
+        - pdValue
+        - provisioningCaseId
+        - scenarioCode
+      type: object
+      properties:
+        riskAssessmentId:
+          type: string
+          format: uuid
+          readOnly: true
+        provisioningCaseId:
+          type: string
+          format: uuid
+        pdValue:
+          maximum: 1
+          exclusiveMaximum: false
+          minimum: 0
+          exclusiveMinimum: false
+          type: number
+        lgdValue:
+          maximum: 1
+          exclusiveMaximum: false
+          minimum: 0
+          exclusiveMinimum: false
+          type: number
+        eadValue:
+          type: number
+        modelVersion:
+          maxLength: 100
+          minLength: 0
+          type: string
+        scenarioCode:
+          type: string
+          enum:
+            - BASE
+            - OPTIMISTIC
+            - ADVERSE
+            - SEVERE
+        assessmentDate:
+          type: string
+          format: date-time
+        details:
+          maxLength: 2000
+          minLength: 0
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+        updatedAt:
+          type: string
+          format: date-time
+          readOnly: true
+    ProvisioningCalculationDTO:
+      required:
+        - calcMethod
+        - calcTimestamp
+        - finalEcl
+        - provisioningCaseId
+        - riskAssessmentId
+      type: object
+      properties:
+        provisioningCalculationId:
+          type: string
+          format: uuid
+          readOnly: true
+        provisioningCaseId:
+          type: string
+          format: uuid
+        riskAssessmentId:
+          type: string
+          format: uuid
+        finalEcl:
+          type: number
+        calcMethod:
+          type: string
+          enum:
+            - TWELVE_MONTH_ECL
+            - LIFETIME_ECL
+            - EXPERT_OVERRIDE
+        calcTimestamp:
+          type: string
+          format: date-time
+        notes:
+          maxLength: 1000
+          minLength: 0
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+        updatedAt:
+          type: string
+          format: date-time
+          readOnly: true
+    ProvisioningJournalDTO:
+      required:
+        - accountingJournalEntryId
+        - isReversal
+        - postedAt
+        - postingDescription
+        - provisionChangeAmount
+        - provisioningCalculationId
+      type: object
+      properties:
+        provisioningJournalId:
+          type: string
+          format: uuid
+          readOnly: true
+        provisioningCalculationId:
+          type: string
+          format: uuid
+        accountingJournalEntryId:
+          type: string
+          format: uuid
+        provisionChangeAmount:
+          type: number
+        postedAt:
+          type: string
+          format: date-time
+        postingDescription:
+          maxLength: 500
+          minLength: 0
+          type: string
+        isReversal:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+        updatedAt:
+          type: string
+          format: date-time
+          readOnly: true
+    PaginationResponseProvisioningCaseDTO:
+      type: object
+      properties:
+        content:
+          type: array
+          description: The list of items for the current page.
+          items:
+            $ref: '#/components/schemas/ProvisioningCaseDTO'
+        totalElements:
+          type: integer
+          description: The total number of elements across all pages.
+          format: int64
+        totalPages:
+          type: integer
+          description: The total number of pages based on the data size and page size.
+          format: int32
+        currentPage:
+          type: integer
+          description: The current page number, typically zero-based.
+          format: int32
+      description: Represents a paginated response containing a list of items and pagination metadata.
+    PaginationResponseProvisioningStageHistoryDTO:
+      type: object
+      properties:
+        content:
+          type: array
+          description: The list of items for the current page.
+          items:
+            $ref: '#/components/schemas/ProvisioningStageHistoryDTO'
+        totalElements:
+          type: integer
+          description: The total number of elements across all pages.
+          format: int64
+        totalPages:
+          type: integer
+          description: The total number of pages based on the data size and page size.
+          format: int32
+        currentPage:
+          type: integer
+          description: The current page number, typically zero-based.
+          format: int32
+      description: Represents a paginated response containing a list of items and pagination metadata.
+    PaginationResponseRiskAssessmentDTO:
+      type: object
+      properties:
+        content:
+          type: array
+          description: The list of items for the current page.
+          items:
+            $ref: '#/components/schemas/RiskAssessmentDTO'
+        totalElements:
+          type: integer
+          description: The total number of elements across all pages.
+          format: int64
+        totalPages:
+          type: integer
+          description: The total number of pages based on the data size and page size.
+          format: int32
+        currentPage:
+          type: integer
+          description: The current page number, typically zero-based.
+          format: int32
+      description: Represents a paginated response containing a list of items and pagination metadata.
+    PaginationResponseProvisioningCalculationDTO:
+      type: object
+      properties:
+        content:
+          type: array
+          description: The list of items for the current page.
+          items:
+            $ref: '#/components/schemas/ProvisioningCalculationDTO'
+        totalElements:
+          type: integer
+          description: The total number of elements across all pages.
+          format: int64
+        totalPages:
+          type: integer
+          description: The total number of pages based on the data size and page size.
+          format: int32
+        currentPage:
+          type: integer
+          description: The current page number, typically zero-based.
+          format: int32
+      description: Represents a paginated response containing a list of items and pagination metadata.
+    PaginationResponseProvisioningJournalDTO:
+      type: object
+      properties:
+        content:
+          type: array
+          description: The list of items for the current page.
+          items:
+            $ref: '#/components/schemas/ProvisioningJournalDTO'
+        totalElements:
+          type: integer
+          description: The total number of elements across all pages.
+          format: int64
+        totalPages:
+          type: integer
+          description: The total number of pages based on the data size and page size.
+          format: int32
+        currentPage:
+          type: integer
+          description: The current page number, typically zero-based.
+          format: int32
+      description: Represents a paginated response containing a list of items and pagination metadata.
