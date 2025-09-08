@@ -368,7 +368,7 @@ ENTRYPOINT ["java", "-jar", "/app.jar"]
 
 ### Environment-Specific Deployments
 
-- **Development**: `http://core.catalis.vc/loan-origination`
+- **Development**: `http://core.getfirefly.io/loan-origination`
 - **Local Development**: `http://localhost:8080`
 
 ### Health Checks and Monitoring
