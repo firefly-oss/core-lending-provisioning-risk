@@ -17,9 +17,9 @@
 
 package com.firefly.core.lending.provisioning.core.services.provisioning.v1;
 
-import com.firefly.common.core.filters.FilterRequest;
-import com.firefly.common.core.filters.FilterUtils;
-import com.firefly.common.core.queries.PaginationResponse;
+import org.fireflyframework.core.filters.FilterRequest;
+import org.fireflyframework.core.filters.FilterUtils;
+import org.fireflyframework.core.queries.PaginationResponse;
 import com.firefly.core.lending.provisioning.core.mappers.provisioning.v1.ProvisioningCaseMapper;
 import com.firefly.core.lending.provisioning.interfaces.dtos.provisioning.v1.ProvisioningCaseDTO;
 import com.firefly.core.lending.provisioning.models.entities.provisioning.v1.ProvisioningCase;

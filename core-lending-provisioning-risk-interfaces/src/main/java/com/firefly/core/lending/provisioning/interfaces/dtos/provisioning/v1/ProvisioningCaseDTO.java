@@ -20,7 +20,7 @@ package com.firefly.core.lending.provisioning.interfaces.dtos.provisioning.v1;
 import com.firefly.core.lending.provisioning.interfaces.enums.provisioning.v1.ProvisioningStatusEnum;
 import com.firefly.core.lending.provisioning.interfaces.enums.provisioning.v1.RiskGradeEnum;
 import com.firefly.core.lending.provisioning.interfaces.enums.assessment.v1.StageCodeEnum;
-import com.firefly.core.utils.annotations.FilterableId;
+import org.fireflyframework.utils.annotations.FilterableId;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

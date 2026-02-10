@@ -17,9 +17,9 @@
 
 package com.firefly.core.lending.provisioning.core.services.assessment.v1;
 
-import com.firefly.common.core.filters.FilterRequest;
-import com.firefly.common.core.filters.FilterUtils;
-import com.firefly.common.core.queries.PaginationResponse;
+import org.fireflyframework.core.filters.FilterRequest;
+import org.fireflyframework.core.filters.FilterUtils;
+import org.fireflyframework.core.queries.PaginationResponse;
 import com.firefly.core.lending.provisioning.core.mappers.assessment.v1.RiskAssessmentMapper;
 import com.firefly.core.lending.provisioning.interfaces.dtos.assessment.v1.RiskAssessmentDTO;
 import com.firefly.core.lending.provisioning.models.entities.assessment.v1.RiskAssessment;

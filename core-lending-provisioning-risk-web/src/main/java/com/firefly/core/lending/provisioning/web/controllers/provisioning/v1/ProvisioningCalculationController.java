@@ -17,8 +17,8 @@
 
 package com.firefly.core.lending.provisioning.web.controllers.provisioning.v1;
 
-import com.firefly.common.core.filters.FilterRequest;
-import com.firefly.common.core.queries.PaginationResponse;
+import org.fireflyframework.core.filters.FilterRequest;
+import org.fireflyframework.core.queries.PaginationResponse;
 import com.firefly.core.lending.provisioning.core.services.provisioning.v1.ProvisioningCalculationService;
 import com.firefly.core.lending.provisioning.interfaces.dtos.provisioning.v1.ProvisioningCalculationDTO;
 import io.swagger.v3.oas.annotations.Operation;
