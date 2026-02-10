@@ -1,7 +1,7 @@
 # Core Lending Provisioning Risk Service
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://openjdk.java.net/projects/jdk/21/)
+[![Java](https://img.shields.io/badge/Java-25-orange.svg)](https://openjdk.java.net/projects/jdk/25/)
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-green.svg)](https://spring.io/projects/spring-boot)
 
 ## Overview
@@ -52,7 +52,7 @@ The service follows a clean, modular architecture with clear separation of conce
 
 ### Technology Stack
 
-- **Java 21** with Virtual Threads for enhanced concurrency
+- **Java 25** with Virtual Threads for enhanced concurrency
 - **Spring Boot 3.x** with Spring WebFlux for reactive programming
 - **R2DBC** for reactive database access with PostgreSQL
 - **Flyway** for database schema migrations
@@ -201,7 +201,7 @@ When the application is running, access the interactive API documentation:
 
 ### Prerequisites
 
-- **Java 21** or later (with Virtual Threads support)
+- **Java 25** or later (with Virtual Threads support)
 - **Maven 3.8** or later
 - **PostgreSQL 12** or later
 - **Docker** (optional, for containerized deployment)
@@ -291,7 +291,7 @@ spring:
 
   threads:
     virtual:
-      enabled: true  # Enable Java 21 Virtual Threads
+      enabled: true  # Enable Java 25 Virtual Threads
 
 management:
   endpoints:
@@ -309,7 +309,7 @@ management:
 
 ### Code Standards
 
-- **Java 21 Features**: Leverage Virtual Threads, pattern matching, and modern language features
+- **Java 25 Features**: Leverage Virtual Threads, pattern matching, and modern language features
 - **Reactive Programming**: Use Mono/Flux consistently throughout the application
 - **Lombok**: Minimize boilerplate with `@Data`, `@Builder`, `@RequiredArgsConstructor`
 - **Validation**: Use Bean Validation annotations on DTOs
