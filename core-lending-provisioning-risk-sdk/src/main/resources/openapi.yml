@@ -1,0 +1,1320 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+- url: http://localhost:18080
+  description: Generated server url
+tags:
+- name: ProvisioningCalculation
+  description: Provisioning calculation ops under a provisioning case
+- name: ProvisioningStageHistory
+  description: Stage history operations under a provisioning case
+- name: ProvisioningJournal
+  description: Provisioning journal entries for a specific calculation
+- name: ProvisioningCase
+  description: Operations on Provisioning Cases
+- name: RiskAssessment
+  description: Risk assessment operations under a provisioning case
+paths:
+  /api/v1/provisioning-cases/{provisioningCaseId}:
+    get:
+      tags:
+      - ProvisioningCase
+      summary: Get a provisioning case by ID
+      operationId: getById
+      parameters:
+      - name: provisioningCaseId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ProvisioningCaseDTO"
+    put:
+      tags:
+      - ProvisioningCase
+      summary: Update a provisioning case
+      operationId: update
+      parameters:
+      - name: provisioningCaseId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProvisioningCaseDTO"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ProvisioningCaseDTO"
+    delete:
+      tags:
+      - ProvisioningCase
+      summary: Delete a provisioning case
+      operationId: delete
+      parameters:
+      - name: provisioningCaseId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /api/v1/provisioning-cases/{provisioningCaseId}/stage-history/{provisioningStageHistoryId}:
+    get:
+      tags:
+      - ProvisioningStageHistory
+      summary: Get a stage history entry by ID
+      operationId: getById_1
+      parameters:
+      - name: provisioningCaseId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: provisioningStageHistoryId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ProvisioningStageHistoryDTO"
+    put:
+      tags:
+      - ProvisioningStageHistory
+      summary: Update a stage history entry
+      operationId: update_1
+      parameters:
+      - name: provisioningCaseId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: provisioningStageHistoryId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProvisioningStageHistoryDTO"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ProvisioningStageHistoryDTO"
+    delete:
+      tags:
+      - ProvisioningStageHistory
+      summary: Delete a stage history entry
+      operationId: delete_1
+      parameters:
+      - name: provisioningCaseId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: provisioningStageHistoryId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /api/v1/provisioning-cases/{provisioningCaseId}/risk-assessments/{riskAssessmentId}:
+    get:
+      tags:
+      - RiskAssessment
+      summary: Get a risk assessment by ID
+      operationId: getById_2
+      parameters:
+      - name: provisioningCaseId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: riskAssessmentId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/RiskAssessmentDTO"
+    put:
+      tags:
+      - RiskAssessment
+      summary: Update a risk assessment
+      operationId: update_2
+      parameters:
+      - name: provisioningCaseId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: riskAssessmentId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RiskAssessmentDTO"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/RiskAssessmentDTO"
+    delete:
+      tags:
+      - RiskAssessment
+      summary: Delete a risk assessment
+      operationId: delete_2
+      parameters:
+      - name: provisioningCaseId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: riskAssessmentId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /api/v1/provisioning-cases/{provisioningCaseId}/calculations/{provisioningCalculationId}:
+    get:
+      tags:
+      - ProvisioningCalculation
+      summary: Get a provisioning calculation by ID
+      operationId: getById_3
+      parameters:
+      - name: provisioningCaseId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: provisioningCalculationId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ProvisioningCalculationDTO"
+    put:
+      tags:
+      - ProvisioningCalculation
+      summary: Update a provisioning calculation
+      operationId: update_3
+      parameters:
+      - name: provisioningCaseId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: provisioningCalculationId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProvisioningCalculationDTO"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ProvisioningCalculationDTO"
+    delete:
+      tags:
+      - ProvisioningCalculation
+      summary: Delete a provisioning calculation
+      operationId: delete_3
+      parameters:
+      - name: provisioningCaseId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: provisioningCalculationId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /api/v1/provisioning-cases/{provisioningCaseId}/calculations/{provisioningCalculationId}/journal/{provisioningJournalId}:
+    get:
+      tags:
+      - ProvisioningJournal
+      summary: Get a provisioning journal entry by ID
+      operationId: getById_4
+      parameters:
+      - name: provisioningCaseId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: provisioningCalculationId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: provisioningJournalId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ProvisioningJournalDTO"
+    put:
+      tags:
+      - ProvisioningJournal
+      summary: Update a provisioning journal entry
+      operationId: update_4
+      parameters:
+      - name: provisioningCaseId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: provisioningCalculationId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: provisioningJournalId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProvisioningJournalDTO"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ProvisioningJournalDTO"
+    delete:
+      tags:
+      - ProvisioningJournal
+      summary: Delete a provisioning journal entry
+      operationId: delete_4
+      parameters:
+      - name: provisioningCaseId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: provisioningCalculationId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: provisioningJournalId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+  /api/v1/provisioning-cases:
+    get:
+      tags:
+      - ProvisioningCase
+      summary: List or search provisioning cases
+      operationId: findAll
+      parameters:
+      - name: filterRequest
+        in: query
+        required: true
+        schema:
+          $ref: "#/components/schemas/FilterRequestProvisioningCaseDTO"
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PaginationResponseProvisioningCaseDTO"
+    post:
+      tags:
+      - ProvisioningCase
+      summary: Create a new provisioning case
+      operationId: create
+      parameters:
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProvisioningCaseDTO"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ProvisioningCaseDTO"
+  /api/v1/provisioning-cases/{provisioningCaseId}/stage-history:
+    get:
+      tags:
+      - ProvisioningStageHistory
+      summary: List or search stage history for a provisioning case
+      operationId: findAll_1
+      parameters:
+      - name: provisioningCaseId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: filterRequest
+        in: query
+        required: true
+        schema:
+          $ref: "#/components/schemas/FilterRequestProvisioningStageHistoryDTO"
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PaginationResponseProvisioningStageHistoryDTO"
+    post:
+      tags:
+      - ProvisioningStageHistory
+      summary: Create a new stage history entry
+      operationId: create_1
+      parameters:
+      - name: provisioningCaseId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProvisioningStageHistoryDTO"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ProvisioningStageHistoryDTO"
+  /api/v1/provisioning-cases/{provisioningCaseId}/risk-assessments:
+    get:
+      tags:
+      - RiskAssessment
+      summary: List or search risk assessments for a provisioning case
+      operationId: findAll_2
+      parameters:
+      - name: provisioningCaseId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: filterRequest
+        in: query
+        required: true
+        schema:
+          $ref: "#/components/schemas/FilterRequestRiskAssessmentDTO"
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PaginationResponseRiskAssessmentDTO"
+    post:
+      tags:
+      - RiskAssessment
+      summary: Create a new risk assessment
+      operationId: create_2
+      parameters:
+      - name: provisioningCaseId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RiskAssessmentDTO"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/RiskAssessmentDTO"
+  /api/v1/provisioning-cases/{provisioningCaseId}/calculations:
+    get:
+      tags:
+      - ProvisioningCalculation
+      summary: List or search provisioning calculations for a case
+      operationId: findAll_3
+      parameters:
+      - name: provisioningCaseId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: filterRequest
+        in: query
+        required: true
+        schema:
+          $ref: "#/components/schemas/FilterRequestProvisioningCalculationDTO"
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PaginationResponseProvisioningCalculationDTO"
+    post:
+      tags:
+      - ProvisioningCalculation
+      summary: Create a new provisioning calculation
+      operationId: create_3
+      parameters:
+      - name: provisioningCaseId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProvisioningCalculationDTO"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ProvisioningCalculationDTO"
+  /api/v1/provisioning-cases/{provisioningCaseId}/calculations/{provisioningCalculationId}/journal:
+    get:
+      tags:
+      - ProvisioningJournal
+      summary: List or search provisioning journal entries for a calculation
+      operationId: findAll_4
+      parameters:
+      - name: provisioningCaseId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: provisioningCalculationId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: filterRequest
+        in: query
+        required: true
+        schema:
+          $ref: "#/components/schemas/FilterRequestProvisioningJournalDTO"
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/PaginationResponseProvisioningJournalDTO"
+    post:
+      tags:
+      - ProvisioningJournal
+      summary: Create a new provisioning journal entry
+      operationId: create_4
+      parameters:
+      - name: provisioningCaseId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: provisioningCalculationId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Idempotency-Key
+        in: header
+        description: "Unique key for idempotent requests. If provided, ensures that\
+          \ identical requests with the same key will only be processed once."
+        required: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProvisioningJournalDTO"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ProvisioningJournalDTO"
+components:
+  schemas:
+    ProvisioningCaseDTO:
+      required:
+      - loanServicingCaseId
+      - provisioningStatus
+      - riskGrade
+      - stageCode
+      type: object
+      properties:
+        provisioningCaseId:
+          type: string
+          format: uuid
+          readOnly: true
+        loanServicingCaseId:
+          type: string
+          format: uuid
+        stageCode:
+          type: string
+          enum:
+          - STAGE_1
+          - STAGE_2
+          - STAGE_3
+          - POCI
+        eclAmount:
+          type: number
+        riskGrade:
+          type: string
+          enum:
+          - AAA
+          - AA
+          - A
+          - BBB
+          - BB
+          - B
+          - CCC
+          - CC
+          - C
+          - D
+        lastCalculatedAt:
+          type: string
+          format: date-time
+        provisioningStatus:
+          type: string
+          enum:
+          - ACTIVE
+          - RELEASED
+          - WRITTEN_OFF
+          - RECOVERED
+        remarks:
+          maxLength: 1000
+          minLength: 0
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+        updatedAt:
+          type: string
+          format: date-time
+          readOnly: true
+    ProvisioningStageHistoryDTO:
+      required:
+      - changedAt
+      - changedBy
+      - eclAmountAtChange
+      - newStageCode
+      - oldStageCode
+      - provisioningCaseId
+      - reason
+      type: object
+      properties:
+        provisioningStageHistoryId:
+          type: string
+          format: uuid
+          readOnly: true
+        provisioningCaseId:
+          type: string
+          format: uuid
+        oldStageCode:
+          type: string
+          enum:
+          - STAGE_1
+          - STAGE_2
+          - STAGE_3
+          - POCI
+        newStageCode:
+          type: string
+          enum:
+          - STAGE_1
+          - STAGE_2
+          - STAGE_3
+          - POCI
+        eclAmountAtChange:
+          type: number
+        changedAt:
+          type: string
+          format: date-time
+        changedBy:
+          maxLength: 100
+          minLength: 0
+          type: string
+        reason:
+          maxLength: 500
+          minLength: 0
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+        updatedAt:
+          type: string
+          format: date-time
+          readOnly: true
+    RiskAssessmentDTO:
+      required:
+      - assessmentDate
+      - eadValue
+      - lgdValue
+      - modelVersion
+      - pdValue
+      - provisioningCaseId
+      - scenarioCode
+      type: object
+      properties:
+        riskAssessmentId:
+          type: string
+          format: uuid
+          readOnly: true
+        provisioningCaseId:
+          type: string
+          format: uuid
+        pdValue:
+          maximum: 1.0
+          exclusiveMaximum: false
+          minimum: 0.0
+          exclusiveMinimum: false
+          type: number
+        lgdValue:
+          maximum: 1.0
+          exclusiveMaximum: false
+          minimum: 0.0
+          exclusiveMinimum: false
+          type: number
+        eadValue:
+          type: number
+        modelVersion:
+          maxLength: 100
+          minLength: 0
+          type: string
+        scenarioCode:
+          type: string
+          enum:
+          - BASE
+          - OPTIMISTIC
+          - ADVERSE
+          - SEVERE
+        assessmentDate:
+          type: string
+          format: date-time
+        details:
+          maxLength: 2000
+          minLength: 0
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+        updatedAt:
+          type: string
+          format: date-time
+          readOnly: true
+    ProvisioningCalculationDTO:
+      required:
+      - calcMethod
+      - calcTimestamp
+      - finalEcl
+      - provisioningCaseId
+      - riskAssessmentId
+      type: object
+      properties:
+        provisioningCalculationId:
+          type: string
+          format: uuid
+          readOnly: true
+        provisioningCaseId:
+          type: string
+          format: uuid
+        riskAssessmentId:
+          type: string
+          format: uuid
+        finalEcl:
+          type: number
+        calcMethod:
+          type: string
+          enum:
+          - TWELVE_MONTH_ECL
+          - LIFETIME_ECL
+          - EXPERT_OVERRIDE
+        calcTimestamp:
+          type: string
+          format: date-time
+        notes:
+          maxLength: 1000
+          minLength: 0
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+        updatedAt:
+          type: string
+          format: date-time
+          readOnly: true
+    ProvisioningJournalDTO:
+      required:
+      - accountingJournalEntryId
+      - isReversal
+      - postedAt
+      - postingDescription
+      - provisionChangeAmount
+      - provisioningCalculationId
+      type: object
+      properties:
+        provisioningJournalId:
+          type: string
+          format: uuid
+          readOnly: true
+        provisioningCalculationId:
+          type: string
+          format: uuid
+        accountingJournalEntryId:
+          type: string
+          format: uuid
+        provisionChangeAmount:
+          type: number
+        postedAt:
+          type: string
+          format: date-time
+        postingDescription:
+          maxLength: 500
+          minLength: 0
+          type: string
+        isReversal:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+          readOnly: true
+        updatedAt:
+          type: string
+          format: date-time
+          readOnly: true
+    FilterOptions:
+      type: object
+      properties:
+        caseInsensitiveStrings:
+          type: boolean
+        includeInheritedFields:
+          type: boolean
+      description: Filter options for customizing filter behavior
+    FilterRequestProvisioningCaseDTO:
+      required:
+      - pagination
+      type: object
+      properties:
+        filters:
+          $ref: "#/components/schemas/ProvisioningCaseDTO"
+        rangeFilters:
+          $ref: "#/components/schemas/RangeFilter"
+        pagination:
+          $ref: "#/components/schemas/PaginationRequest"
+        options:
+          $ref: "#/components/schemas/FilterOptions"
+      description: Generic filter request that includes both filter criteria and pagination
+    PaginationRequest:
+      type: object
+      properties:
+        pageNumber:
+          type: integer
+          description: The zero-based page number to retrieve.
+          format: int32
+          example: 0
+          default: 0
+        pageSize:
+          type: integer
+          description: The number of items per page.
+          format: int32
+          example: 10
+          default: 10
+        sortBy:
+          type: string
+          description: The field to sort the results by.
+          example: name
+        sortDirection:
+          type: string
+          description: "The direction of sorting, either ASC or DESC."
+          example: DESC
+          default: DESC
+      description: "Represents a pagination request for retrieving paginated results,\
+        \ including page number, size, sort field, and direction."
+    RangeFilter:
+      type: object
+      properties:
+        ranges:
+          type: object
+          additionalProperties:
+            $ref: "#/components/schemas/RangeObject"
+          description: Map of field names to their range criteria
+      description: Represents range filters for numeric fields
+    RangeObject:
+      type: object
+      properties:
+        from:
+          type: object
+          description: Start value of the range
+        to:
+          type: object
+          description: End value of the range
+      description: Represents a range with from and to values
+    PaginationResponseProvisioningCaseDTO:
+      type: object
+      properties:
+        content:
+          type: array
+          description: The list of items for the current page.
+          items:
+            $ref: "#/components/schemas/ProvisioningCaseDTO"
+        totalElements:
+          type: integer
+          description: The total number of elements across all pages.
+          format: int64
+        totalPages:
+          type: integer
+          description: The total number of pages based on the data size and page size.
+          format: int32
+        currentPage:
+          type: integer
+          description: "The current page number, typically zero-based."
+          format: int32
+      description: Represents a paginated response containing a list of items and
+        pagination metadata.
+    FilterRequestProvisioningStageHistoryDTO:
+      required:
+      - pagination
+      type: object
+      properties:
+        filters:
+          $ref: "#/components/schemas/ProvisioningStageHistoryDTO"
+        rangeFilters:
+          $ref: "#/components/schemas/RangeFilter"
+        pagination:
+          $ref: "#/components/schemas/PaginationRequest"
+        options:
+          $ref: "#/components/schemas/FilterOptions"
+      description: Generic filter request that includes both filter criteria and pagination
+    PaginationResponseProvisioningStageHistoryDTO:
+      type: object
+      properties:
+        content:
+          type: array
+          description: The list of items for the current page.
+          items:
+            $ref: "#/components/schemas/ProvisioningStageHistoryDTO"
+        totalElements:
+          type: integer
+          description: The total number of elements across all pages.
+          format: int64
+        totalPages:
+          type: integer
+          description: The total number of pages based on the data size and page size.
+          format: int32
+        currentPage:
+          type: integer
+          description: "The current page number, typically zero-based."
+          format: int32
+      description: Represents a paginated response containing a list of items and
+        pagination metadata.
+    FilterRequestRiskAssessmentDTO:
+      required:
+      - pagination
+      type: object
+      properties:
+        filters:
+          $ref: "#/components/schemas/RiskAssessmentDTO"
+        rangeFilters:
+          $ref: "#/components/schemas/RangeFilter"
+        pagination:
+          $ref: "#/components/schemas/PaginationRequest"
+        options:
+          $ref: "#/components/schemas/FilterOptions"
+      description: Generic filter request that includes both filter criteria and pagination
+    PaginationResponseRiskAssessmentDTO:
+      type: object
+      properties:
+        content:
+          type: array
+          description: The list of items for the current page.
+          items:
+            $ref: "#/components/schemas/RiskAssessmentDTO"
+        totalElements:
+          type: integer
+          description: The total number of elements across all pages.
+          format: int64
+        totalPages:
+          type: integer
+          description: The total number of pages based on the data size and page size.
+          format: int32
+        currentPage:
+          type: integer
+          description: "The current page number, typically zero-based."
+          format: int32
+      description: Represents a paginated response containing a list of items and
+        pagination metadata.
+    FilterRequestProvisioningCalculationDTO:
+      required:
+      - pagination
+      type: object
+      properties:
+        filters:
+          $ref: "#/components/schemas/ProvisioningCalculationDTO"
+        rangeFilters:
+          $ref: "#/components/schemas/RangeFilter"
+        pagination:
+          $ref: "#/components/schemas/PaginationRequest"
+        options:
+          $ref: "#/components/schemas/FilterOptions"
+      description: Generic filter request that includes both filter criteria and pagination
+    PaginationResponseProvisioningCalculationDTO:
+      type: object
+      properties:
+        content:
+          type: array
+          description: The list of items for the current page.
+          items:
+            $ref: "#/components/schemas/ProvisioningCalculationDTO"
+        totalElements:
+          type: integer
+          description: The total number of elements across all pages.
+          format: int64
+        totalPages:
+          type: integer
+          description: The total number of pages based on the data size and page size.
+          format: int32
+        currentPage:
+          type: integer
+          description: "The current page number, typically zero-based."
+          format: int32
+      description: Represents a paginated response containing a list of items and
+        pagination metadata.
+    FilterRequestProvisioningJournalDTO:
+      required:
+      - pagination
+      type: object
+      properties:
+        filters:
+          $ref: "#/components/schemas/ProvisioningJournalDTO"
+        rangeFilters:
+          $ref: "#/components/schemas/RangeFilter"
+        pagination:
+          $ref: "#/components/schemas/PaginationRequest"
+        options:
+          $ref: "#/components/schemas/FilterOptions"
+      description: Generic filter request that includes both filter criteria and pagination
+    PaginationResponseProvisioningJournalDTO:
+      type: object
+      properties:
+        content:
+          type: array
+          description: The list of items for the current page.
+          items:
+            $ref: "#/components/schemas/ProvisioningJournalDTO"
+        totalElements:
+          type: integer
+          description: The total number of elements across all pages.
+          format: int64
+        totalPages:
+          type: integer
+          description: The total number of pages based on the data size and page size.
+          format: int32
+        currentPage:
+          type: integer
+          description: "The current page number, typically zero-based."
+          format: int32
+      description: Represents a paginated response containing a list of items and
+        pagination metadata.
