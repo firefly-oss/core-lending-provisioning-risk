@@ -6,7 +6,7 @@
 
 ## Overview
 
-The **Core Lending Provisioning Risk Service** is a critical microservice component of the **Firefly OpenCore Banking Platform**, developed by **Firefly Software Solutions Inc**. This service manages loan provisioning and risk assessment operations, providing comprehensive functionality for calculating Expected Credit Loss (ECL) amounts, managing provisioning cases, and tracking risk assessments for loan portfolios in compliance with IFRS 9 standards.
+The **Core Lending Provisioning Risk Service** is a critical microservice component of the **Firefly OpenCore Banking Platform**, developed by **Firefly Software Foundation**. This service manages loan provisioning and risk assessment operations, providing comprehensive functionality for calculating Expected Credit Loss (ECL) amounts, managing provisioning cases, and tracking risk assessments for loan portfolios in compliance with IFRS 9 standards.
 
 The service implements a sophisticated risk assessment framework that supports multiple calculation methods, scenario-based modeling, and comprehensive audit trails for regulatory compliance and financial reporting.
 
@@ -279,7 +279,7 @@ spring:
     version: 1.0.0
     description: Provisioning Risk Core Application
     team:
-      name: Firefly Software Solutions Inc
+      name: Firefly Software Foundation
       email: dev@getfirefly.io
 
   r2dbc:
@@ -443,7 +443,7 @@ This project is licensed under the **Apache License 2.0** - see the [LICENSE](LI
 
 ## Support and Contact
 
-- **Organization**: [Firefly Software Solutions Inc](https://getfirefly.io)
+- **Organization**: [Firefly Software Foundation](https://getfirefly.io)
 - **GitHub Organization**: [firefly-oss](https://github.com/firefly-oss)
 - **Development Team**: dev@getfirefly.io
 - **Documentation**: Available in the `/docs` directory and via Swagger UI
