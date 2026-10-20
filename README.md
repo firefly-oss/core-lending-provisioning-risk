@@ -280,7 +280,7 @@ spring:
     description: Provisioning Risk Core Application
     team:
       name: Firefly Software Foundation
-      email: dev@getfirefly.io
+      email: dev@fireflysoftware.io
 
   r2dbc:
     pool:
@@ -368,7 +368,7 @@ ENTRYPOINT ["java", "-jar", "/app.jar"]
 
 ### Environment-Specific Deployments
 
-- **Development**: `http://core.getfirefly.io/loan-origination`
+- **Development**: `https://openplatform.fireflysoftware.io/loan-origination`
 - **Local Development**: `http://localhost:8080`
 
 ### Health Checks and Monitoring
@@ -443,9 +443,9 @@ This project is licensed under the **Apache License 2.0** - see the [LICENSE](LI
 
 ## Support and Contact
 
-- **Organization**: [Firefly Software Foundation](https://getfirefly.io)
+- **Organization**: [Firefly Software Foundation](https://fireflysoftware.io)
 - **GitHub Organization**: [firefly-oss](https://github.com/firefly-oss)
-- **Development Team**: dev@getfirefly.io
+- **Development Team**: dev@fireflysoftware.io
 - **Documentation**: Available in the `/docs` directory and via Swagger UI
 
 ## Related Projects
