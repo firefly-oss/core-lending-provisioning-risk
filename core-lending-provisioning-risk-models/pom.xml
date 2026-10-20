@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>core-lending-provisioning-risk-models</artifactId>
+    <name>core-lending-provisioning-risk-models</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

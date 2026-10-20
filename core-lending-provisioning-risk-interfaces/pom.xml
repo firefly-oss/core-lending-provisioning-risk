@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>core-lending-provisioning-risk-interfaces</artifactId>
+    <name>core-lending-provisioning-risk-interfaces</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -12,6 +12,7 @@
     </parent>
 
     <artifactId>core-lending-provisioning-risk</artifactId>
+    <name>core-lending-provisioning-risk</name>
     <packaging>pom</packaging>
     <modules>
         <module>core-lending-provisioning-risk-core</module>
