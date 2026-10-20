@@ -1,0 +1,76 @@
+/*
+ * Copyright 2025 Firefly Software Foundation
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+
+package io.fireflysoftware.core.lending.provisioning.core.services.assessment.v1;
+
+import org.fireflyframework.core.filters.FilterRequest;
+import org.fireflyframework.core.queries.PaginationResponse;
+import io.fireflysoftware.core.lending.provisioning.interfaces.dtos.assessment.v1.RiskAssessmentDTO;
+import reactor.core.publisher.Mono;
+
+import java.util.UUID;
+
+public interface RiskAssessmentService {
+
+    /**
+     * Retrieves a paginated list of RiskAssessmentDTO objects associated with a specific provisioning case.
+     *
+     * @param provisioningCaseId the unique identifier of the provisioning case to retrieve risk assessment records for
+     * @param filterRequest an object containing filtering and pagination criteria for the query
+     * @return a Mono containing a PaginationResponse of RiskAssessmentDTO representing the filtered and paginated list of risk assessment records
+     */
+    Mono<PaginationResponse<RiskAssessmentDTO>> findAll(UUID provisioningCaseId,
+                                                        FilterRequest<RiskAssessmentDTO> filterRequest);
+
+    /**
+     * Creates a new risk assessment associated with a specific provisioning case.
+     *
+     * @param provisioningCaseId the unique identifier of the provisioning case to which the risk assessment is linked
+     * @param dto the RiskAssessmentDTO containing the details of the risk assessment to be created
+     * @return a Mono emitting the created RiskAssessmentDTO
+     */
+    Mono<RiskAssessmentDTO> create(UUID provisioningCaseId, RiskAssessmentDTO dto);
+
+    /**
+     * Retrieves a specific risk assessment associated with a given provisioning case.
+     *
+     * @param provisioningCaseId the unique identifier of the provisioning case the risk assessment belongs to
+     * @param riskAssessmentId the unique identifier of the risk assessment to retrieve
+     * @return a Mono emitting the RiskAssessmentDTO if found, or empty if not found
+     */
+    Mono<RiskAssessmentDTO> getById(UUID provisioningCaseId, UUID riskAssessmentId);
+
+    /**
+     * Updates an existing risk assessment for a specified provisioning case with the provided details.
+     *
+     * @param provisioningCaseId the unique identifier of the provisioning case to which the risk assessment belongs
+     * @param riskAssessmentId the unique identifier of the risk assessment to be updated
+     * @param dto the data transfer object containing the updated details of the risk assessment
+     * @return a Mono emitting the updated RiskAssessmentDTO
+     */
+    Mono<RiskAssessmentDTO> update(UUID provisioningCaseId, UUID riskAssessmentId, RiskAssessmentDTO dto);
+
+    /**
+     * Deletes a risk assessment associated with the specified provisioning case
+     * and risk assessment identifiers.
+     *
+     * @param provisioningCaseId the unique identifier of the provisioning case
+     * @param riskAssessmentId the unique identifier of the risk assessment to delete
+     * @return a Mono that completes when the deletion process is successful
+     */
+    Mono<Void> delete(UUID provisioningCaseId, UUID riskAssessmentId);
+}

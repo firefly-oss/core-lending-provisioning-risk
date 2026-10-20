@@ -427,7 +427,7 @@ The service provides an SDK module for easy integration:
 
 ```xml
 <dependency>
-    <groupId>com.firefly</groupId>
+    <groupId>io.fireflysoftware</groupId>
     <artifactId>core-lending-provisioning-risk-sdk</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 </dependency>

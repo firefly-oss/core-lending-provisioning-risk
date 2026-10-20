@@ -1,0 +1,86 @@
+/*
+ * Copyright 2025 Firefly Software Foundation
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+
+package io.fireflysoftware.core.lending.provisioning.core.services.assessment.v1;
+
+import org.fireflyframework.core.filters.FilterRequest;
+import org.fireflyframework.core.filters.FilterUtils;
+import org.fireflyframework.core.queries.PaginationResponse;
+import io.fireflysoftware.core.lending.provisioning.core.mappers.assessment.v1.RiskAssessmentMapper;
+import io.fireflysoftware.core.lending.provisioning.interfaces.dtos.assessment.v1.RiskAssessmentDTO;
+import io.fireflysoftware.core.lending.provisioning.models.entities.assessment.v1.RiskAssessment;
+import io.fireflysoftware.core.lending.provisioning.models.repositories.assessment.v1.RiskAssessmentRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import reactor.core.publisher.Mono;
+
+import java.util.UUID;
+
+@Service
+@Transactional
+public class RiskAssessmentServiceImpl implements RiskAssessmentService {
+
+    @Autowired
+    private RiskAssessmentRepository repository;
+
+    @Autowired
+    private RiskAssessmentMapper mapper;
+
+    @Override
+    public Mono<PaginationResponse<RiskAssessmentDTO>> findAll(UUID provisioningCaseId, FilterRequest<RiskAssessmentDTO> filterRequest) {
+        filterRequest.getFilters().setProvisioningCaseId(provisioningCaseId);
+        return FilterUtils.createFilter(
+                RiskAssessment.class,
+                mapper::toDTO
+        ).filter(filterRequest);
+    }
+
+    @Override
+    public Mono<RiskAssessmentDTO> create(UUID provisioningCaseId, RiskAssessmentDTO dto) {
+        dto.setProvisioningCaseId(provisioningCaseId);
+        return repository.save(mapper.toEntity(dto))
+                .map(mapper::toDTO);
+    }
+
+    @Override
+    public Mono<RiskAssessmentDTO> getById(UUID provisioningCaseId, UUID riskAssessmentId) {
+        return repository.findById(riskAssessmentId)
+                .filter(entity -> entity.getProvisioningCaseId().equals(provisioningCaseId))
+                .map(mapper::toDTO);
+    }
+
+    @Override
+    public Mono<RiskAssessmentDTO> update(UUID provisioningCaseId, UUID riskAssessmentId, RiskAssessmentDTO dto) {
+        return repository.findById(riskAssessmentId)
+                .filter(entity -> entity.getProvisioningCaseId().equals(provisioningCaseId))
+                .flatMap(existing -> {
+                    RiskAssessment updated = mapper.toEntity(dto);
+                    updated.setRiskAssessmentId(riskAssessmentId);
+                    updated.setProvisioningCaseId(provisioningCaseId);
+                    return repository.save(updated);
+                })
+                .map(mapper::toDTO);
+    }
+
+    @Override
+    public Mono<Void> delete(UUID provisioningCaseId, UUID riskAssessmentId) {
+        return repository.findById(riskAssessmentId)
+                .filter(entity -> entity.getProvisioningCaseId().equals(provisioningCaseId))
+                .flatMap(repository::delete);
+    }
+}
